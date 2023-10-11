@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Banco-papesa</string>
+    <string name="input_dni">Introduce tu DNI</string>
+    <string name="btn_entrar">Entrar</string>
+    <string name="btn_salir">Salir</string>
+    <string name="input_pass">Introduce la contraseña</string>
+    <string name="campo_requerido">Campo requerido</string>
+    <string name="bank">banco</string>
+</resources>

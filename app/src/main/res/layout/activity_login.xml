@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineH"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        android:hint="@string/input_dni"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
+        android:layout_marginBottom="@dimen/common_margin_default"
+        app:helperText="@string/campo_requerido"
+        app:endIconMode="clear_text"
+
+        android:layout_marginStart="@dimen/margin_imput_login"
+        android:layout_marginEnd="@dimen/margin_imput_login">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guidelineH"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/input_pass"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
+
+        app:helperText="@string/campo_requerido"
+        app:endIconMode="password_toggle"
+
+        android:layout_marginTop="@dimen/common_margin_default"
+        android:layout_marginStart="@dimen/margin_imput_login"
+        android:layout_marginEnd="@dimen/margin_imput_login">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEntrar"
+        android:layout_width="@dimen/login_btn_size"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_entrar"
+
+        app:layout_constraintStart_toEndOf="@id/guidelineV"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_marginStart="@dimen/common_margin_default"
+        android:layout_marginBottom="@dimen/common_margin_default"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSalir"
+        android:layout_width="@dimen/login_btn_size"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_salir"
+
+        app:layout_constraintEnd_toStartOf="@id/guidelineV"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_marginEnd="@dimen/common_margin_default"
+        android:layout_marginBottom="@dimen/common_margin_default"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
