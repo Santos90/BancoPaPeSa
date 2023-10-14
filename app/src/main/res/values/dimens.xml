@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="common_margin_default">16dp</dimen>
-    <dimen name="margin_imput_login">64dp</dimen>
+    <dimen name="margin_imput_login">34dp</dimen>
     <dimen name="login_btn_size">150dp</dimen>
 </resources>

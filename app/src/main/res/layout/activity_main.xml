@@ -13,16 +13,42 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin_default">
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:padding="@dimen/common_margin_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageView
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/user_img"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:src="@drawable/ic_person"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mensaje_bienvenida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bienvenido/a"
+                    app:layout_constraintStart_toEndOf="@+id/user_img"
+                    android:layout_marginStart="@dimen/common_margin_default"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/dniLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Num DNI: 204893284C"
+                    app:layout_constraintStart_toEndOf="@+id/user_img"
+                    app:layout_constraintTop_toBottomOf="@id/mensaje_bienvenida"
+
+                    android:layout_margin="@dimen/common_margin_default"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
 
 

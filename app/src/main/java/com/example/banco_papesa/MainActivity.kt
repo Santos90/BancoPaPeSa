@@ -2,10 +2,21 @@ package com.example.banco_papesa
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import com.example.banco_papesa.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val dni = intent.getStringExtra("dni")
+        Log.d("DNI","El dni es: $dni")
+
+
+        binding.dniLabel.text = dni
     }
 }
