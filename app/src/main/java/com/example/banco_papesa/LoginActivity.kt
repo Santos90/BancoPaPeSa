@@ -17,44 +17,55 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var pass: String
+        var dni: String
+        var passGuardado = "1234"
+        if (intent.getStringExtra("pass") != null) {
+            passGuardado = intent.getStringExtra("pass").toString()
+            Snackbar.make(binding.root, getString(R.string.contrasenya_cambiada_con_exito), Snackbar.LENGTH_SHORT).show()
+        }
+
+
 
 
         binding.btnEntrar.setOnClickListener {
-            val dni = binding.dniInput.text.toString()
-            val pass = binding.passInput.text.toString()
+            dni = binding.dniInput.text.toString()
+            pass = binding.passInput.text.toString()
             val dniValido = esDNIValido(dni)
             Log.e("password", "Contraseña:$pass.")
             if ( ! esDNIValido(dni)) {
-                val mensajeError = "DNI no válido"
+                val mensajeError = getString(R.string.dni_no_valido)
                 Snackbar.make(binding.root, mensajeError, Snackbar.LENGTH_SHORT).show()
-                binding.dniInput.error = "DNI no válido"
+                binding.dniInput.error = mensajeError
             }
             else binding.dniInput.error = null
 
             if (pass.isEmpty() ) {
-                val mensajeError = "Contraseña requerida"
+                val mensajeError = getString(R.string.contrasenya_requerida)
                 Snackbar.make(binding.root, mensajeError, Snackbar.LENGTH_SHORT).show()
-                binding.passInput.error = "Contraseña requerida"
-                binding.passInput.setHintTextColor(67)
+                binding.passInput.error = mensajeError
+
             }
             else binding.passInput.error = null
 
-            if (dniValido && pass.isNotEmpty()){
+            if (dniValido && pass == passGuardado){
                 val mainIntent = Intent(this, MainActivity::class.java)
                 mainIntent.putExtra("dni", dni)
+                mainIntent.putExtra("pass", pass)
                 startActivity(mainIntent)
+
             }
         }
 
         binding.btnSalir.setOnClickListener {
             finish()
         }
-
+        val mensajeError = getString(R.string.dni_no_valido)
         binding.dniInput.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) { // Se ejecuta cuando el TextInput pierde el foco
                 val dni = binding.dniInput.text.toString()
                 if (!esDNIValido(dni)) {
-                    binding.dniInput.error = "DNI no válido"
+                    binding.dniInput.error = mensajeError
                 }
             }
         }
@@ -63,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
             if (!hasFocus) { // Se ejecuta cuando el TextInput pierde el foco
                 val pass = binding.passInput.text.toString()
                 if (pass.isEmpty()) {
-                    binding.dniInput.error = "DNI no válido"
+                    binding.dniInput.error = mensajeError
                 }
             }
         }

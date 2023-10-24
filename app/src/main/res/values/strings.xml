@@ -1,9 +1,30 @@
 <resources>
-    <string name="app_name">Banco-papesa</string>
+    <string name="app_name">Banco Pau</string>
     <string name="input_dni">Introduce tu DNI</string>
     <string name="btn_entrar">Entrar</string>
     <string name="btn_salir">Salir</string>
     <string name="input_pass">Introduce la contraseña</string>
     <string name="campo_requerido">Campo requerido</string>
     <string name="bank">banco</string>
+    <string name="iniciar_sesion_title">Iniciar sesión</string>
+    <string name="welcome_msg">Bienvenido/a</string>
+    <string name="dni_no_encontrado">DNI no encontrado</string>
+    <string name="posicion_global">Posición Global</string>
+    <string name="cambiar_contrasenya">Cambiar contraseña</string>
+    <string name="transferencias">Transferencias</string>
+    <string name="promociones">Promociones</string>
+    <string name="cajeros">Cajeros</string>
+    <string name="salir">Salir</string>
+    <string name="movimientos">Movimientos</string>
+    <string name="contrasenyas_nuevas_no_coinciden">Contraseñas nuevas no coinciden</string>
+    <string name="contrasenya_cambiada_con_exito">Contraseña cambiada con éxito</string>
+    <string name="contrasenya_incorrecta">Contraseña incorrecta</string>
+    <string name="dni_no_valido">DNI no válido</string>
+    <string name="contrasenya_requerida">Contraseña requerida</string>
+    <string name="modificar_contrasenya">Modificar\nContraseña</string>
+    <string name="introduce_la_actual_contrasenya">Introduce la actual contraseña</string>
+    <string name="introduce_la_nueva_contrasenya">Introduce la nueva contraseña</string>
+    <string name="repite_la_nueva_contrasenya">Repite la nueva contraseña</string>
+    <string name="modificar">Modificar</string>
+
 </resources>

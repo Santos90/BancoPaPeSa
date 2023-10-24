@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Bank-papesa</string>
+    <string name="input_dni">Enter your ID</string>
+    <string name="btn_entrar">Login</string>
+    <string name="btn_salir">Exit</string>
+    <string name="input_pass">Enter the password</string>
+    <string name="campo_requerido">Required field</string>
+    <string name="bank">bank</string>
+    <string name="iniciar_sesion_title">Log in</string>
+    <string name="welcome_msg">Welcome</string>
+    <string name="dni_no_encontrado">ID not found</string>
+    <string name="posicion_global">Global Position</string>
+    <string name="cambiar_contrasenya">Change Password</string>
+    <string name="transferencias">Transfers</string>
+    <string name="promociones">Promotions</string>
+    <string name="cajeros">ATMs</string>
+    <string name="salir">Exit</string>
+    <string name="movimientos">Transactions</string>
+    <string name="contrasenyas_nuevas_no_coinciden">New passwords do not match</string>
+    <string name="contrasenya_cambiada_con_exito">Password changed successfully</string>
+    <string name="contrasenya_incorrecta">Incorrect password</string>
+    <string name="dni_no_valido">Invalid ID</string>
+    <string name="contrasenya_requerida">Password required</string>
+    <string name="modificar_contrasenya">Change\nPassword</string>
+    <string name="introduce_la_actual_contrasenya">Enter the current password</string>
+    <string name="introduce_la_nueva_contrasenya">Enter the new password</string>
+    <string name="repite_la_nueva_contrasenya">Repeat the new password</string>
+    <string name="modificar">Modify</string>
+
+</resources>
