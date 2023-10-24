@@ -3,7 +3,7 @@
     <string name="input_dni">Introduce tu DNI</string>
     <string name="btn_entrar">Entrar</string>
     <string name="btn_salir">Salir</string>
-    <string name="input_pass">Introduce la contraseña</string>
+    <string name="input_pass">Introduce la contraseña: 1234</string>
     <string name="campo_requerido">Campo requerido</string>
     <string name="bank">banco</string>
     <string name="iniciar_sesion_title">Iniciar sesión</string>
@@ -26,5 +26,6 @@
     <string name="introduce_la_nueva_contrasenya">Introduce la nueva contraseña</string>
     <string name="repite_la_nueva_contrasenya">Repite la nueva contraseña</string>
     <string name="modificar">Modificar</string>
+    <string name="dni_y_contrasenya_no_coinciden">DNI y contraseña no coinciden</string>
 
 </resources>

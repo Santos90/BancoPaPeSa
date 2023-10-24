@@ -33,6 +33,21 @@ class LoginActivity : AppCompatActivity() {
             pass = binding.passInput.text.toString()
             val dniValido = esDNIValido(dni)
             Log.e("password", "Contraseña:$pass.")
+
+
+            if (dniValido && pass == passGuardado){
+                val mainIntent = Intent(this, MainActivity::class.java)
+                mainIntent.putExtra("dni", dni)
+                mainIntent.putExtra("pass", pass)
+                startActivity(mainIntent)
+
+            } else {
+                val mensajeError = getString(R.string.dni_y_contrasenya_no_coinciden)
+                Snackbar.make(binding.root, mensajeError, Snackbar.LENGTH_SHORT).show()
+                binding.dniInput.error = mensajeError
+                binding.passInput.error = mensajeError
+            }
+
             if ( ! esDNIValido(dni)) {
                 val mensajeError = getString(R.string.dni_no_valido)
                 Snackbar.make(binding.root, mensajeError, Snackbar.LENGTH_SHORT).show()
@@ -47,19 +62,13 @@ class LoginActivity : AppCompatActivity() {
 
             }
             else binding.passInput.error = null
-
-            if (dniValido && pass == passGuardado){
-                val mainIntent = Intent(this, MainActivity::class.java)
-                mainIntent.putExtra("dni", dni)
-                mainIntent.putExtra("pass", pass)
-                startActivity(mainIntent)
-
-            }
         }
 
         binding.btnSalir.setOnClickListener {
             finish()
         }
+
+
         val mensajeError = getString(R.string.dni_no_valido)
         binding.dniInput.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) { // Se ejecuta cuando el TextInput pierde el foco
