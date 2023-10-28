@@ -27,6 +27,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        binding.btnTransferencias?.setOnClickListener {
+            val transferenciaIntent = Intent(this, TransferActivity::class.java)
+            startActivity(transferenciaIntent)
+
+        }
+
         binding.btnSalir.setOnClickListener {
             finish()
         }
