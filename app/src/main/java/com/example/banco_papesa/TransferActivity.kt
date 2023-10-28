@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.banco_papesa.databinding.ActivityTransferBinding
 import com.example.banco_papesa.databinding.ActivityWelcomeBinding
+import org.w3c.dom.Text
 
 class TransferActivity : AppCompatActivity() {
 
@@ -114,6 +115,12 @@ class TransferActivity : AppCompatActivity() {
 
         binding.btnCancelar.setOnClickListener {
             finish()
+
+            with(binding){
+                tiCantidadTransferencia.setText("")
+                tiCuentaDestino.setText("")
+                cbEnviarJustificante.isActivated = false
+            }
         }
 
     }
