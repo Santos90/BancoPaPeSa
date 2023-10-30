@@ -28,4 +28,27 @@
     <string name="modificar">Modify</string>
     <string name="dni_y_contrasenya_no_coinciden">DNI and password do not match</string>
 
+
+    <string name="transferencia">Transfer</string>
+    <string name="cuenta_origen">Source account:</string>
+    <string name="cuenta_destino">Destination account:</string>
+    <string name="propia">Own</string>
+    <string name="ajena">"Other's:"</string>
+    <string name="escribe_el_num_de_cuenta">Enter the account number</string>
+    <string name="cantidad">"Amount: "</string>
+    <string name="enviar_justificante">Send receipt</string>
+    <string name="cancelar">Cancel</string>
+    <string name="enviar">Send</string>
+
+    <string name="error_cuenta_destino">Error! Enter the destination account number.</string>
+    <string name="error_icantidad_transferencia">Error! Enter the transfer amount.</string>
+    <string name="cuenta_destino_conf">Destination account: </string>
+    <string name="propia_txt">Own:\n</string>
+    <string name="ajena_txt">"Other's:"</string>
+    <string name="importe">"Amount: "</string>
+    <string name="enviar_justificante_txt">"Send receipt: "</string>
+    <string name="confirmar_transaccion_titulo_dialogo">Confirm transaction?</string>
+
+
+
 </resources>

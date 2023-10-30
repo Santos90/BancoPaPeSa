@@ -27,5 +27,23 @@
     <string name="repite_la_nueva_contrasenya">Repite la nueva contraseña</string>
     <string name="modificar">Modificar</string>
     <string name="dni_y_contrasenya_no_coinciden">DNI y contraseña no coinciden</string>
+    <string name="transferencia">Transferencia</string>
+    <string name="cuenta_origen">Cuenta origen:</string>
+    <string name="cuenta_destino">Cuenta destino:</string>
+    <string name="propia">Propia</string>
+    <string name="ajena">Ajena</string>
+    <string name="escribe_el_num_de_cuenta">Escribe el num. de cuenta</string>
+    <string name="cantidad">Cantidad:</string>
+    <string name="enviar_justificante">Enviar justificante</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="enviar">Enviar</string>
+    <string name="error_cuenta_destino">Error! Introduce el nº\nde la cuenta destino.</string>
+    <string name="error_icantidad_transferencia">Error! Introduce la/ncantidad a transferir.</string>
+    <string name="cuenta_destino_conf">"Cuenta destino "</string>
+    <string name="propia_txt">propia:</string>
+    <string name="ajena_txt">ajena:</string>
+    <string name="importe">"Importe: "</string>
+    <string name="enviar_justificante_txt">"Enviar justificante: "</string>
+    <string name="confirmar_transaccion_titulo_dialogo">Confirmar transacción?</string>
 
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,122 +7,198 @@
     tools:context=".TransferActivity"
     android:orientation="vertical">
 
-    <com.google.android.material.textview.MaterialTextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:text="Transferencia"/>
-
-    <Spinner
-        android:id="@+id/spCuentaOrigen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_margin_default"
-        android:layout_marginTop="@dimen/common_margin_default"
-        android:layout_marginEnd="@dimen/common_margin_default"/>
-
-    <RadioGroup
-        android:id="@+id/rgTipoCuenta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_margin="16dp">
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/rbCuentaPropia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-
-            android:text="Cuenta propia" />
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/rbCuentaAjena"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cuenta ajena"
-            android:layout_marginStart="16dp"
-           />
-
-    </RadioGroup>
+        android:layout_height="match_parent">
 
 
-    <Spinner
-        android:id="@+id/spCuentaDestino"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_margin_default"
-        android:layout_marginTop="@dimen/common_margin_default"
-        android:layout_marginEnd="@dimen/common_margin_default"/>
-    
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/tiCuentaDestino"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Escribe el num. de cuenta ajena"
-        android:visibility="gone"
-        android:textAlignment="center"
-        android:layout_margin="@dimen/common_margin_default"/>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cantidad: "
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/common_margin_default"/>
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiCantidadTransferencia"
-            android:layout_width="260dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:layout_margin="16dp"/>
-
-        <Spinner
-            android:id="@+id/spDivisa"
+            android:id="@+id/tituloActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"/>
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:text="@string/transferencia"
 
-    </LinearLayout>
+            android:layout_marginTop="@dimen/common_margin_default"
+            app:layout_constraintBottom_toBottomOf="@id/guidelineH15"/>
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/cbEnviarJustificante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enviar justificante"
-        android:layout_gravity="center"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCancelar"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lbCuentaOrigen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/common_margin_default"
-            android:text="Cancelar"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnEnviar"
+            android:text="@string/cuenta_origen"
+            app:layout_constraintBottom_toTopOf="@id/spCuentaOrigen"
+            app:layout_constraintStart_toStartOf="@id/spCuentaOrigen"/>
+        <Spinner
+            android:id="@+id/spCuentaOrigen"
+            android:scrollbarStyle="insideInset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/common_margin_default"
-            android:text="Enviar"/>
 
-    </LinearLayout>
+            android:layout_marginBottom="@dimen/common_margin_default"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rgTipoCuenta"/>
+
+        <RadioGroup
+            android:id="@+id/rgTipoCuenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+
+            app:layout_constraintBottom_toTopOf="@id/guidelineCuentaDestino"
+            app:layout_constraintStart_toStartOf="@id/lbCuentaOrigen">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cuenta_destino"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbCuentaPropia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:layout_marginStart="@dimen/common_margin_default"
+
+                android:text="@string/propia" />
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbCuentaAjena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/ajena"
+                android:layout_marginStart="3dp"/>
+
+        </RadioGroup>
 
 
-</LinearLayout>
+        <Spinner
+            android:id="@+id/spCuentaDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/spCuentaOrigen"
+            app:layout_constraintBottom_toBottomOf="@id/tiCuentaDestino"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiCuentaDestino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/escribe_el_num_de_cuenta"
+            android:visibility="invisible"
+            android:textAlignment="center"
+            android:inputType="textShortMessage"
+
+            android:layout_marginHorizontal="@dimen/double_margin_default"
+            app:layout_constraintTop_toBottomOf="@id/guidelineCuentaDestino"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lbCantidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cantidad"
+
+            app:layout_constraintStart_toStartOf="@id/lbCuentaOrigen"
+            app:layout_constraintTop_toBottomOf="@id/spCuentaDestino"
+
+            android:layout_marginTop="@dimen/common_margin_default"/>
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiCantidadTransferencia"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+
+                android:textAlignment="viewEnd"
+                android:inputType="number|numberDecimal"
+
+
+                app:layout_constraintTop_toBottomOf="@id/lbCantidad"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Spinner
+                android:id="@+id/spDivisa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:spinnerMode="dropdown"
+                app:layout_constraintStart_toEndOf="@id/tiCantidadTransferencia"
+
+                app:layout_constraintBottom_toBottomOf="@id/tiCantidadTransferencia"/>
+
+
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbEnviarJustificante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/double_margin_default"
+
+            android:checked="true"
+            android:text="@string/enviar_justificante"
+            app:layout_constraintBottom_toTopOf="@id/guidelineH85"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/guidelineH85">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_margin_default"
+                android:layout_weight="1"
+                android:text="@string/cancelar"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEnviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/common_margin_default"
+                android:layout_weight="1.2"
+                android:text="@string/enviar" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineH85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.85" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineCuentaDestino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineV1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

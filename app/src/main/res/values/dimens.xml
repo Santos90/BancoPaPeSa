@@ -4,4 +4,5 @@
     <dimen name="margin_imput_login">34dp</dimen>
     <dimen name="login_btn_size">150dp</dimen>
     <dimen name="double_margin_default">32dp</dimen>
+    <dimen name="spiner_margin">45dp</dimen>
 </resources>
