@@ -7,6 +7,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import com.example.banco_papesa.databinding.ActivityLoginBinding
+import com.example.bancoapiprofe.bd.MiBancoOperacional
+import com.example.bancoapiprofe.pojo.Cliente
+import com.example.bancoapiprofe.pojo.Cuenta
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -19,14 +22,6 @@ class LoginActivity : AppCompatActivity() {
 
         var pass: String
         var dni: String
-        var passGuardado = "1234"
-        if (intent.getStringExtra("pass") != null) {
-            passGuardado = intent.getStringExtra("pass").toString()
-            Snackbar.make(binding.root, getString(R.string.contrasenya_cambiada_con_exito), Snackbar.LENGTH_SHORT).show()
-        }
-
-
-
 
         binding.btnEntrar.setOnClickListener {
             dni = binding.dniInput.text.toString()
@@ -34,11 +29,19 @@ class LoginActivity : AppCompatActivity() {
             val dniValido = esDNIValido(dni)
             Log.e("password", "Contraseña:$pass.")
 
+            val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(this)
 
-            if (dniValido && pass == passGuardado){
+            val cliente = Cliente()
+            cliente.setNif(dni)
+            cliente.setClaveSeguridad(pass)
+
+            val clienteDevuelto = mbo?.login(cliente) ?: -1
+
+
+            if (clienteDevuelto != -1){
+
                 val mainIntent = Intent(this, MainActivity::class.java)
-                mainIntent.putExtra("dni", dni)
-                mainIntent.putExtra("pass", pass)
+                mainIntent.putExtra("cliente", clienteDevuelto)
                 startActivity(mainIntent)
 
             } else {
@@ -101,6 +104,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun esDNIValido(dni: String): Boolean {
+        /*
         val dniPattern = Regex("^(\\d{8})([A-HJ-NP-TV-Za-hj-np-tv-z])$")
         if (dniPattern.matches(dni)) {
             val numero = dni.substring(0, 8).toInt()
@@ -110,5 +114,7 @@ class LoginActivity : AppCompatActivity() {
             return dni[8].uppercaseChar() == letraControl
         }
         return false
+        */
+        return true
     }
 }

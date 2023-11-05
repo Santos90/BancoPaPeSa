@@ -11,10 +11,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.banco_papesa.databinding.ActivityTransferBinding
+import com.example.bancoapiprofe.bd.MiBancoOperacional
 
 class TransferActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTransferBinding
+    private var mbo = MiBancoOperacional.getInstance(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTransferBinding.inflate(layoutInflater)
@@ -153,8 +155,7 @@ class TransferActivity : AppCompatActivity() {
                 //Toast.makeText(this, resultado, Toast.LENGTH_SHORT).show()
                 //Log.i("Resultado transacción:", resultado)
 
-                dialogoDeConfirmacion(resultado,
-                    getString(com.example.banco_papesa.R.string.confirmar_transaccion_titulo_dialogo))
+                dialogoDeConfirmacion(resultado, getString(com.example.banco_papesa.R.string.confirmar_transaccion_titulo_dialogo))
             }
 
 
