@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnPosGlobal?.setOnClickListener {
             val posGlobalIntent = Intent(this, GlobalPositionActivity::class.java)
+            posGlobalIntent.putExtras(intent)
             startActivity(posGlobalIntent)
         }
 

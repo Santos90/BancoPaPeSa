@@ -67,6 +67,14 @@ class MiBancoOperacional protected constructor(context: Context?) {
          - Si la operacion es correcta se devuelve un 0
     */
     fun transferencia(movimientoTransferencia: Movimiento?): Int {
+
+        if (miBD?.cuentaDAO?.search(movimientoTransferencia?.getCuentaDestino()) == null) {
+            return 1
+        }
+        
+        miBD?.movimientoDAO?.add(movimientoTransferencia)
+
+
         return 0
     }
 

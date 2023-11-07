@@ -3,6 +3,7 @@ package com.example.bancoapiprofe.dao
 import android.content.ContentValues
 import android.database.Cursor
 import android.text.TextUtils
+import android.util.Log
 import com.example.bancoapiprofe.bd.MiBD
 import com.example.bancoapiprofe.pojo.Cliente
 import java.lang.String
@@ -56,7 +57,7 @@ class ClienteDAO : PojoDAO {
         } else {
             "nif=" + "'" + c.getNif() + "'"
         }
-        val columnas = arrayOf("id", "nif", "nombre", "apellidos", "claveseguridad", "email")
+        val columnas = arrayOf("id", "nif", "nombre", "apellidos", "claveSeguridad", "email")
 
         val cursor: Cursor? =
             MiBD.dB?.query("clientes", columnas, condicion, null, null, null, null) ?:null
@@ -69,6 +70,8 @@ class ClienteDAO : PojoDAO {
             nuevoCliente.setApellidos(cursor.getString(3))
             nuevoCliente.setClaveSeguridad(cursor.getString(4))
             nuevoCliente.setEmail(cursor.getString(5))
+ 
+            Log.i("Nuevo Cliente", nuevoCliente.toString())
 
             // Obtenemos la lista de cuentas que tiene el cliente
             //c.setListaCuentas(MiBD.getInstance(null).getCuentaDAO().getCuentas(c));

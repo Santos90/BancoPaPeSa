@@ -33,6 +33,7 @@ class MovementsActivity : AppCompatActivity(), OnClickListener {
 
         val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(this)
         val cliente = intent.getSerializableExtra("cliente") as Cliente
+        Log.i("Cliente", cliente.toString())
 
 
         val listaCuentas = mbo?.getCuentas(cliente) as ArrayList<Cuenta>

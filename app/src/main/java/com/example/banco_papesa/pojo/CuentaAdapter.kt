@@ -1,9 +1,11 @@
 package com.example.banco_papesa.pojo
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -34,6 +36,7 @@ class CuentaAdapter(private val lista: ArrayList<*>, private val listener: OnCli
         return ViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) { //Asignamos el contenido a cada item del Layout Item.xml
         val cuenta = lista.get(position) as Cuenta
 
@@ -41,6 +44,9 @@ class CuentaAdapter(private val lista: ArrayList<*>, private val listener: OnCli
             setListener(cuenta)
             binding.lblTitulo.text = cuenta.getNumeroCuenta()
             binding.lblSubtitulo.text = cuenta.getSaldoActual().toString()
+            if (cuenta.getSaldoActual()!! < 0 )
+                binding.lblSubtitulo.setTextColor(ContextCompat.getColor(context, R.color.rojo_negativo))
+
 
         }
 

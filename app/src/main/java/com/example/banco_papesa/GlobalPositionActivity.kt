@@ -2,6 +2,7 @@ package com.example.banco_papesa
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,8 +28,10 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
 
         val cliente = intent.getSerializableExtra("cliente") as Cliente
 
+        Log.i("Cliente", cliente.toString())
 
-        val listaCuentas : ArrayList<Cuenta> = mbo?.getCuentas(cliente) as ArrayList<Cuenta>
+
+        var listaCuentas: ArrayList<Cuenta> = mbo?.getCuentas(cliente) as ArrayList<Cuenta>
 
 
         cuentaAdapter = CuentaAdapter(listaCuentas, this)

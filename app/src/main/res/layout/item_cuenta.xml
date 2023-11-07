@@ -44,7 +44,8 @@
             tools:text="País"
             app:layout_constraintStart_toEndOf="@id/imagen"
             app:layout_constraintTop_toBottomOf="@id/lblTitulo"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="16dp"
+            android:textColor="@color/color_principal"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
