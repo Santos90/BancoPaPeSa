@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
 
 
             if (clienteDevuelto != -1){
-
+                Log.i("Cliente", clienteDevuelto.toString())
                 val mainIntent = Intent(this, MainActivity::class.java)
                 mainIntent.putExtra("cliente", clienteDevuelto)
                 startActivity(mainIntent)
