@@ -1,19 +1,11 @@
-package com.example.banco_papesa
+package com.example.banco_papesa.activity
 
-import android.animation.Animator
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.airbnb.lottie.Lottie
-import com.airbnb.lottie.LottieAnimationView
-import com.airbnb.lottie.LottieConfig
-import com.example.banco_papesa.R.id.lottieAnimationView
-import com.example.banco_papesa.databinding.ActivityPasswordChangeBinding
 import com.example.banco_papesa.databinding.ActivityWelcomeBinding
-import kotlinx.coroutines.android.awaitFrame
-import kotlin.concurrent.timer
 
 class WelcomeActivity : AppCompatActivity() {
     //private lateinit var lottieAnimationView: LottieAnimationView

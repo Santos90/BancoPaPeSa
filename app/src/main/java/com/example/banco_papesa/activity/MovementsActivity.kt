@@ -1,7 +1,6 @@
-package com.example.banco_papesa
+package com.example.banco_papesa.activity
 
 import android.R
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +11,8 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.banco_papesa.databinding.ActivityMovementsBinding
-import com.example.banco_papesa.pojo.MovimientoAdapter
+import com.example.banco_papesa.adapter.MovimientoAdapter
+import com.example.banco_papesa.adapter.OnClickListener
 import com.example.bancoapiprofe.bd.MiBancoOperacional
 import com.example.bancoapiprofe.pojo.Cliente
 import com.example.bancoapiprofe.pojo.Cuenta
@@ -43,7 +43,7 @@ class MovementsActivity : AppCompatActivity(), OnClickListener {
             listaMovimientos = mbo.getMovimientos(listaCuentas[0]) as ArrayList<Movimiento>
         }
 
-        movimientoAdapter = MovimientoAdapter(listaMovimientos as ArrayList<Any>, this)
+        movimientoAdapter = MovimientoAdapter(listaMovimientos, this)
         linearLayoutManager = LinearLayoutManager(this)
         itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         binding.recyclerId.apply {
@@ -76,7 +76,7 @@ class MovementsActivity : AppCompatActivity(), OnClickListener {
 
                 listaMovimientos = mbo.getMovimientos(listaCuentas[position]) as ArrayList<Movimiento>
 
-                movimientoAdapter = MovimientoAdapter(listaMovimientos as ArrayList<Any>, contexto)
+                movimientoAdapter = MovimientoAdapter(listaMovimientos, contexto)
 
                 binding.recyclerId.adapter = movimientoAdapter
 

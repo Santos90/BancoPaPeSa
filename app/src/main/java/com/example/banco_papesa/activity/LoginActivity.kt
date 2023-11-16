@@ -1,4 +1,4 @@
-package com.example.banco_papesa
+package com.example.banco_papesa.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,10 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
+import com.example.banco_papesa.R
 import com.example.banco_papesa.databinding.ActivityLoginBinding
 import com.example.bancoapiprofe.bd.MiBancoOperacional
 import com.example.bancoapiprofe.pojo.Cliente
-import com.example.bancoapiprofe.pojo.Cuenta
 import com.google.android.material.snackbar.Snackbar
 
 

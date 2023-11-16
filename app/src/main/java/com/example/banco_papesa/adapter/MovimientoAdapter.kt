@@ -1,6 +1,5 @@
-package com.example.banco_papesa.pojo
+package com.example.banco_papesa.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,22 +8,19 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.banco_papesa.OnClickListener
 import com.example.banco_papesa.R
-import com.example.banco_papesa.databinding.ItemCuentaBinding
 import com.example.banco_papesa.databinding.ItemMovimientoBinding
-import com.example.bancoapiprofe.pojo.Cuenta
 import com.example.bancoapiprofe.pojo.Movimiento
 
 
-class MovimientoAdapter (private val lista: ArrayList<Any>, private val listener: OnClickListener):
+class MovimientoAdapter (private val lista: ArrayList<Movimiento>, private val listener: OnClickListener):
     RecyclerView.Adapter<MovimientoAdapter.ViewHolder>(){
 
     inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         val binding = ItemMovimientoBinding.bind(view) //Vinculamos la vista a nuestro adapter
 
-        fun setListener(cuenta :Any){
-            binding.root.setOnClickListener {listener.onClick(cuenta)}
+        fun setListener(item :Movimiento){
+            binding.root.setOnClickListener {listener.onClick(item)}
         }
 
     }
@@ -44,7 +40,7 @@ class MovimientoAdapter (private val lista: ArrayList<Any>, private val listener
 
         with(holder){
             setListener(cuenta)
-            if (cuenta.getImporte()!! < 0 )
+            if (cuenta.getImporte() < 0 )
                 binding.lblSubtitulo.setTextColor(ContextCompat.getColor(context, R.color.rojo_negativo))
 
 
@@ -55,7 +51,7 @@ class MovimientoAdapter (private val lista: ArrayList<Any>, private val listener
         }
 
         Glide.with(context)
-            .load(R.drawable.ic_bank)
+            .load(R.drawable.ic_credit_card)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .centerCrop()
             .into(holder.binding.imagen)

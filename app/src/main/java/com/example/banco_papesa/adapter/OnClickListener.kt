@@ -1,4 +1,4 @@
-package com.example.banco_papesa
+package com.example.banco_papesa.adapter
 
 import java.util.Objects
 

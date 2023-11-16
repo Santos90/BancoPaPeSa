@@ -28,23 +28,24 @@
             android:id="@+id/lblTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             tools:text="Comida"
             app:layout_constraintStart_toEndOf="@id/imagen"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="@dimen/common_margin_default"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/lblSubtitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="normal"
             tools:text="País"
             app:layout_constraintStart_toEndOf="@id/imagen"
             app:layout_constraintTop_toBottomOf="@id/lblTitulo"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/common_margin_default"
             android:textColor="@color/color_principal"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

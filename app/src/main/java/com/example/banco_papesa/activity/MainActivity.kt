@@ -1,10 +1,8 @@
-package com.example.banco_papesa
+package com.example.banco_papesa.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.example.banco_papesa.databinding.ActivityMainBinding
 import com.example.bancoapiprofe.pojo.Cliente
 

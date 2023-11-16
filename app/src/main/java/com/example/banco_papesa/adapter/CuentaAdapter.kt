@@ -1,6 +1,5 @@
-package com.example.banco_papesa.pojo
+package com.example.banco_papesa.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.banco_papesa.OnClickListener
 import com.example.banco_papesa.R
 import com.example.banco_papesa.databinding.ItemCuentaBinding
 import com.example.bancoapiprofe.pojo.Cuenta
