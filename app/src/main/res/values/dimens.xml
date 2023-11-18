@@ -5,4 +5,5 @@
     <dimen name="login_btn_size">150dp</dimen>
     <dimen name="double_margin_default">32dp</dimen>
     <dimen name="spiner_margin">45dp</dimen>
+    <dimen name="card_img_size">88dp</dimen>
 </resources>

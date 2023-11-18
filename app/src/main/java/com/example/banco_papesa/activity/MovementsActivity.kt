@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.banco_papesa.databinding.ActivityMovementsBinding
-import com.example.banco_papesa.adapter.MovimientoAdapter
+import com.example.banco_papesa.adapter.MovementsAdapter
 import com.example.banco_papesa.adapter.OnClickListener
 import com.example.bancoapiprofe.bd.MiBancoOperacional
 import com.example.bancoapiprofe.pojo.Cliente
@@ -21,7 +21,7 @@ import com.example.bancoapiprofe.pojo.Movimiento
 class MovementsActivity : AppCompatActivity(), OnClickListener {
 
     private lateinit var binding: ActivityMovementsBinding
-    private lateinit var movimientoAdapter: MovimientoAdapter
+    private lateinit var movementsAdapter: MovementsAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var itemDecoration: DividerItemDecoration
 
@@ -43,12 +43,12 @@ class MovementsActivity : AppCompatActivity(), OnClickListener {
             listaMovimientos = mbo.getMovimientos(listaCuentas[0]) as ArrayList<Movimiento>
         }
 
-        movimientoAdapter = MovimientoAdapter(listaMovimientos, this)
+        movementsAdapter = MovementsAdapter(listaMovimientos, this)
         linearLayoutManager = LinearLayoutManager(this)
         itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         binding.recyclerId.apply {
             layoutManager = linearLayoutManager
-            adapter = movimientoAdapter
+            adapter = movementsAdapter
             addItemDecoration(itemDecoration)
         }
 
@@ -76,9 +76,9 @@ class MovementsActivity : AppCompatActivity(), OnClickListener {
 
                 listaMovimientos = mbo.getMovimientos(listaCuentas[position]) as ArrayList<Movimiento>
 
-                movimientoAdapter = MovimientoAdapter(listaMovimientos, contexto)
-
-                binding.recyclerId.adapter = movimientoAdapter
+                //Actualizamos el RecicledView con la nueva lista
+                movementsAdapter = MovementsAdapter(listaMovimientos, contexto)
+                binding.recyclerId.adapter = movementsAdapter
 
             }
 

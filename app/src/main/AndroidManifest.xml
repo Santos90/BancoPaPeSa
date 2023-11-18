@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Bancopapesa"
         tools:targetApi="31">
         <activity
+            android:name=".activity.GlobalPositionDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.MovementsActivity"
             android:exported="false" />
         <activity
@@ -32,16 +35,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activity.PasswordChangeActivity"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

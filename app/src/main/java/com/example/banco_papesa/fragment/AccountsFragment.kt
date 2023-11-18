@@ -1,6 +1,5 @@
 package com.example.banco_papesa.fragment
 
-import android.location.GnssAntennaInfo.Listener
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,8 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.banco_papesa.adapter.OnClickListener
-import com.example.banco_papesa.databinding.ActivityGlobalPositionBinding
-import com.example.banco_papesa.adapter.CuentaAdapter
+import com.example.banco_papesa.adapter.AccountsAdapter
 import com.example.banco_papesa.databinding.FragmentAccountsBinding
 import com.example.bancoapiprofe.bd.MiBancoOperacional
 import com.example.bancoapiprofe.pojo.Cliente
@@ -25,9 +23,9 @@ class AccountsFragment : Fragment(), OnClickListener {
 
     private lateinit var binding: FragmentAccountsBinding
 
-    private lateinit var cuentaAdapter: CuentaAdapter
+    private lateinit var accountsAdapter: AccountsAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var itemDecoration: DividerItemDecoration
+
 
     private lateinit var listener: OnClickListener
 
@@ -56,17 +54,17 @@ class AccountsFragment : Fragment(), OnClickListener {
         val listaCuentas = mbo?.getCuentas(cliente) as ArrayList<*>
 
 
-        cuentaAdapter = CuentaAdapter(listaCuentas, this)
+        accountsAdapter = AccountsAdapter(listaCuentas, this)
 
 
         linearLayoutManager = LinearLayoutManager(context)
-        itemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+
 
 
         binding.recyclerView.apply {
             layoutManager = linearLayoutManager
-            adapter = cuentaAdapter
-            addItemDecoration(itemDecoration)
+            adapter = accountsAdapter
+
         }
 
         return binding.root

@@ -2,7 +2,9 @@ package com.example.banco_papesa.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import com.example.banco_papesa.R
 import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.databinding.ActivityGlobalPositionBinding
 import com.example.banco_papesa.fragment.AccountsFragment
@@ -25,7 +27,7 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
 
         supportFragmentManager
             .beginTransaction()
-            .add(binding.fragmentContainer.id, frgAccounts, AccountsFragment::class.java.name)
+            .add(binding.fragmentContainer!!.id, frgAccounts, AccountsFragment::class.java.name)
             .commit()
 
         frgAccounts.setListener(this)
@@ -33,16 +35,39 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
 
     override fun onClick(obj: Any?) {
 
-        //Creamos la instancia del fragment
-        var frgMovementsFragment : AccountsMovementsFragment = AccountsMovementsFragment.newInstance(obj as Cuenta)
+            //Creamos la instancia del fragment
+        var frgMovementsFragment = AccountsMovementsFragment.newInstance(obj as Cuenta)
 
-        supportFragmentManager
-            .beginTransaction()
-            .replace(binding.fragmentContainer.id, frgMovementsFragment, AccountsMovementsFragment::class.java.name)
-            .addToBackStack(null)
-            .commit()
+        var hay2fragments =  binding.fragmentMovement?.let {
+                supportFragmentManager.findFragmentById(it.id)
+            } != null
 
-        frgMovementsFragment.setListener(this)
+
+        if (true) {
+
+            Log.i("Landscape:", true.toString())
+            supportFragmentManager
+                .beginTransaction()
+                .replace(
+                    binding.fragmentMovement!!.id,
+                    frgMovementsFragment,
+                    AccountsMovementsFragment::class.java.name
+                )
+                .commit()
+
+        } else {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(
+                    binding.fragmentContainer.id,
+                    frgMovementsFragment,
+                    AccountsMovementsFragment::class.java.name
+                )
+                .addToBackStack(null)
+                .commit()
+            Log.i("Landscape:", false.toString())
+        }
+        //frgMovementsFragment.setListener(this)
 
         Toast.makeText(this, (obj as Cuenta).getNumeroCuenta(), Toast.LENGTH_SHORT).show()
     }

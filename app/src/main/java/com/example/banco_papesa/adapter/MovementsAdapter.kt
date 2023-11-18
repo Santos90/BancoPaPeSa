@@ -13,8 +13,8 @@ import com.example.banco_papesa.databinding.ItemMovimientoBinding
 import com.example.bancoapiprofe.pojo.Movimiento
 
 
-class MovimientoAdapter (private val lista: ArrayList<Movimiento>, private val listener: OnClickListener):
-    RecyclerView.Adapter<MovimientoAdapter.ViewHolder>(){
+class MovementsAdapter (private val lista: ArrayList<Movimiento>, private val listener: OnClickListener):
+    RecyclerView.Adapter<MovementsAdapter.ViewHolder>(){
 
     inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         val binding = ItemMovimientoBinding.bind(view) //Vinculamos la vista a nuestro adapter

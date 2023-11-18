@@ -30,7 +30,8 @@
         app:layout_constraintTop_toBottomOf="@id/lblTitulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/common_margin_default"/>
+        android:layout_marginTop="@dimen/common_margin_default"
+        android:layout_marginStart="@dimen/double_margin_default"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/lblSubtitulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="@dimen/common_margin_default"/>
+        android:layout_marginTop="@dimen/common_margin_default"
+        android:padding="8dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
