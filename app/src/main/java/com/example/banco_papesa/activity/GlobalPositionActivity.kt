@@ -1,5 +1,7 @@
 package com.example.banco_papesa.activity
 
+import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +22,8 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
 
         binding = ActivityGlobalPositionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         //Recuperar el cliente
         val clienteLogeado = intent.getSerializableExtra("cliente") as Cliente
         //Creamos la instancia del fragment
@@ -35,15 +39,14 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
 
     override fun onClick(obj: Any?) {
 
-            //Creamos la instancia del fragment
+        //Creamos la instancia del fragment
         var frgMovementsFragment = AccountsMovementsFragment.newInstance(obj as Cuenta)
 
-        var hay2fragments =  binding.fragmentMovement?.let {
-                supportFragmentManager.findFragmentById(it.id)
-            } != null
+        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
 
-        if (true) {
+
+        if (isLandscape) {
 
             Log.i("Landscape:", true.toString())
             supportFragmentManager
@@ -56,28 +59,11 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
                 .commit()
 
         } else {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(
-                    binding.fragmentContainer.id,
-                    frgMovementsFragment,
-                    AccountsMovementsFragment::class.java.name
-                )
-                .addToBackStack(null)
-                .commit()
-            Log.i("Landscape:", false.toString())
-        }
-        //frgMovementsFragment.setListener(this)
 
-        Toast.makeText(this, (obj as Cuenta).getNumeroCuenta(), Toast.LENGTH_SHORT).show()
-    }
+            val movimientosIntent = Intent(this, GlobalPositionDetailsActivity::class.java)
+            movimientosIntent.putExtra("cuenta", obj as Cuenta)
+            startActivity(movimientosIntent)
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-        } else {
-            super.onBackPressed()
         }
     }
 }
