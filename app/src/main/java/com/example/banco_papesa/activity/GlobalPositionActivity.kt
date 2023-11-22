@@ -67,7 +67,7 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
                 .commit()
             Log.i("Landscape:", false.toString())
         }
-        //frgMovementsFragment.setListener(this)
+        frgMovementsFragment.setListener(this)
 
         Toast.makeText(this, (obj as Cuenta).getNumeroCuenta(), Toast.LENGTH_SHORT).show()
     }
