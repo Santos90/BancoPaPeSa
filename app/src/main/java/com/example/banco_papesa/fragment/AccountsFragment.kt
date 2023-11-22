@@ -51,10 +51,10 @@ class AccountsFragment : Fragment(), OnClickListener {
         Log.i("Cliente", cliente.toString())
 
 
-        val listaCuentas = mbo?.getCuentas(cliente) as ArrayList<*>
+        val listaCuentas = mbo?.getCuentas(cliente) as ArrayList<Any>
 
 
-        accountsAdapter = AccountsAdapter(listaCuentas, this)
+        accountsAdapter = AccountsAdapter(listaCuentas, listener)
 
 
         linearLayoutManager = LinearLayoutManager(context)
@@ -83,6 +83,6 @@ class AccountsFragment : Fragment(), OnClickListener {
         this.listener = listener
     }
     override fun onClick(obj: Any?) {
-        if (listener != null) listener.onClick(obj)
+        listener?.onClick(obj)
     }
 }

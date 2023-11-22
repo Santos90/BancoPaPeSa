@@ -13,6 +13,7 @@ import com.example.banco_papesa.fragment.AccountsFragment
 import com.example.banco_papesa.fragment.AccountsMovementsFragment
 import com.example.bancoapiprofe.pojo.Cliente
 import com.example.bancoapiprofe.pojo.Cuenta
+import com.example.bancoapiprofe.pojo.Movimiento
 
 class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
 
@@ -38,32 +39,36 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
     }
 
     override fun onClick(obj: Any?) {
+        if (obj is Cuenta) {
+            Log.i("Tipo de objeto", "Es una Cuenta")
+            //Creamos la instancia del fragment
+            var frgMovementsFragment = AccountsMovementsFragment.newInstance(obj as Cuenta)
 
-        //Creamos la instancia del fragment
-        var frgMovementsFragment = AccountsMovementsFragment.newInstance(obj as Cuenta)
-
-        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
 
 
-        if (isLandscape) {
+            if (isLandscape) {
 
-            Log.i("Landscape:", true.toString())
-            supportFragmentManager
-                .beginTransaction()
-                .replace(
-                    binding.fragmentMovement!!.id,
-                    frgMovementsFragment,
-                    AccountsMovementsFragment::class.java.name
-                )
-                .commit()
+                Log.i("Landscape:", true.toString())
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(
+                        binding.fragmentMovement!!.id,
+                        frgMovementsFragment,
+                        AccountsMovementsFragment::class.java.name
+                    )
+                    .commit()
+                frgMovementsFragment.setListener(this)
+            } else {
 
-        } else {
+                val movimientosIntent = Intent(this, GlobalPositionDetailsActivity::class.java)
+                movimientosIntent.putExtra("cuenta", obj as Cuenta)
+                startActivity(movimientosIntent)
 
-            val movimientosIntent = Intent(this, GlobalPositionDetailsActivity::class.java)
-            movimientosIntent.putExtra("cuenta", obj as Cuenta)
-            startActivity(movimientosIntent)
+            }
+        } else if (obj is Movimiento) Log.i("Tipo de objeto", "Es un Movimiento")
 
-        }
+
     }
 }

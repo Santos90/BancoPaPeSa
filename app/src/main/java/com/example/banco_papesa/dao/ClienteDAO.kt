@@ -70,8 +70,6 @@ class ClienteDAO : PojoDAO {
             nuevoCliente.setApellidos(cursor.getString(3))
             nuevoCliente.setClaveSeguridad(cursor.getString(4))
             nuevoCliente.setEmail(cursor.getString(5))
- 
-            Log.i("Nuevo Cliente", nuevoCliente.toString())
 
             // Obtenemos la lista de cuentas que tiene el cliente
             //c.setListaCuentas(MiBD.getInstance(null).getCuentaDAO().getCuentas(c));

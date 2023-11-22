@@ -3,6 +3,8 @@ package com.example.banco_papesa.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.banco_papesa.adapter.AccountsAdapter
+import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.databinding.ActivityMainBinding
 import com.example.bancoapiprofe.pojo.Cliente
 
@@ -14,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         val cliente = intent.getSerializableExtra("cliente") as Cliente
 
