@@ -6,7 +6,7 @@ class Cuenta : Serializable {
     private var id = 0
     private var banco: String? = null
     private var sucursal: String? = null
-    private var dc: String? = null
+    private var dc: String? = null //Digitos de control
     private var numeroCuenta: String? = null
     private var saldoActual = 0f
     private var cliente: Cliente? = null
@@ -33,6 +33,9 @@ class Cuenta : Serializable {
 
     constructor() : super() {}
 
+    fun toIban() : String{
+        return "ES${banco} ${sucursal} ${dc} ${numeroCuenta}"
+    }
     override fun toString(): String {
         return """
                id: ${id}
@@ -104,4 +107,5 @@ class Cuenta : Serializable {
     fun getListaMovimientos(): ArrayList<Movimiento>? {
         return listaMovimientos
     }
+
 }

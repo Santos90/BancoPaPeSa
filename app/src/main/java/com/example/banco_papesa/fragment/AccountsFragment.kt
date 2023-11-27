@@ -43,28 +43,15 @@ class AccountsFragment : Fragment(), OnClickListener {
         binding = FragmentAccountsBinding.inflate(layoutInflater)
 
 
-
         val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(context)
-
-
-
-        Log.i("Cliente", cliente.toString())
-
-
         val listaCuentas = mbo?.getCuentas(cliente) as ArrayList<*>
 
 
         accountsAdapter = AccountsAdapter(listaCuentas, this)
-
-
         linearLayoutManager = LinearLayoutManager(context)
-
-
-
         binding.recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = accountsAdapter
-
         }
 
         return binding.root

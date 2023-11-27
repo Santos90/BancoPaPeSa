@@ -1,13 +1,11 @@
 package com.example.banco_papesa.fragment
 
-import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.banco_papesa.R
 import com.example.banco_papesa.adapter.OnClickListener
@@ -85,9 +83,9 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
         dialogBinding.tvId.text = "Id: ${movimiento.getId()}"
         dialogBinding.tvCuentaDestino.text = getString(
             R.string.cuenta_destino_dialogo,
-            movimiento.getCuentaDestino()!!.getNumeroCuenta()
+            movimiento.getCuentaDestino()!!.toIban()
         )
-        dialogBinding.tvCuentaOrigen.text = "Cuenta origen: ${movimiento.getCuentaOrigen()!!.getNumeroCuenta()}"
+        dialogBinding.tvCuentaOrigen.text = "Cuenta origen:\n${movimiento.getCuentaOrigen()!!.toIban()}"
         dialogBinding.tvDescripcion.text = "Descripción:\n${movimiento.getDescripcion()}\n"
         dialogBinding.tvTipo.text = "Tipo: ${movimiento.getTipo()}"
         dialogBinding.tvFecha.text = "Fecha: ${movimiento.getFechaOperacion().toString()}"

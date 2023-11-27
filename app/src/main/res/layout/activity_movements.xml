@@ -4,14 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MovementsActivity">
+    tools:context=".activity.MovementsActivity"
+    android:padding="@dimen/minium_margin">
+
+    <TextView
+        android:id="@+id/lbTituloActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Movimientos"
+        android:textSize="@dimen/titulo_activity"
+        android:layout_marginTop="@dimen/common_margin_default"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Spinner
         android:id="@+id/spCuenta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_margin_default"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/lbTituloActivity"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerId"

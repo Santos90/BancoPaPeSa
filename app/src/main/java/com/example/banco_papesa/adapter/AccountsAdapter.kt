@@ -40,7 +40,9 @@ class AccountsAdapter(private val lista: ArrayList<*>, private val listener: OnC
 
         with(holder){
             setListener(cuenta)
-            binding.lblTitulo.text = cuenta.getNumeroCuenta()
+            binding.lblTitulo.text = cuenta.toIban()
+
+
             binding.lblSubtitulo.text = cuenta.getSaldoActual().toString()
             if (cuenta.getSaldoActual()!! < 0 )
                 binding.lblSubtitulo.setTextColor(ContextCompat.getColor(context, R.color.rojo_negativo))
