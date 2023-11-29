@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/filter_all"
+        android:title="Todos"
+        android:icon="@drawable/filter_all" />
+
+    <item
+        android:id="@+id/filter_1"
+        android:title="Tipo 1"
+        android:icon="@drawable/filter_1" />
+
+    <item
+        android:id="@+id/filter_2"
+        android:title="Tipo 2"
+        android:icon="@drawable/filter_2" />
+
+    <item
+        android:id="@+id/filter_3"
+        android:title="Tipo 3"
+        android:icon="@drawable/filter_3" />
+</menu>
