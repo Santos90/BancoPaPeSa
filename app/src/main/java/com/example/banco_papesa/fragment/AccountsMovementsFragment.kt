@@ -33,8 +33,6 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
     private lateinit var cuentaAdapter: MovementsAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
 
-
-    private lateinit var listener: OnClickListener
     private var tipoFilto = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,9 +50,6 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
         }
     }
 
-    fun setListener (listener: OnClickListener){
-        this.listener = listener
-    }
 
     fun setFilter(tipo : Int) {
         tipoFilto = tipo
@@ -67,8 +62,11 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
         binding = FragmentAccountsMovementsBinding.inflate(layoutInflater)
 
         val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(context)
-
-        val listaMovimientos = mbo?.getMovimientosTipo(cuenta, tipoFilto) as ArrayList<Movimiento>
+        val listaMovimientos: ArrayList<Movimiento>
+        if (tipoFilto == -1) {
+            listaMovimientos = mbo?.getMovimientos(cuenta) as ArrayList<Movimiento>
+        }
+        else listaMovimientos = mbo?.getMovimientosTipo(cuenta, tipoFilto) as ArrayList<Movimiento>
 
         cuentaAdapter = MovementsAdapter(listaMovimientos, this)
         linearLayoutManager = LinearLayoutManager(context)
@@ -85,7 +83,7 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
 
 
     override fun onClick(obj: Any?) {
-        listener.onClick(obj)
+
         dialogBinding = DialogMovementBinding.inflate(layoutInflater)
         val movimiento = obj as Movimiento
 

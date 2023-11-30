@@ -46,8 +46,6 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
 
             val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-
-
             if (isLandscape) {
 
                 Log.i("Landscape:", true.toString())
@@ -59,7 +57,7 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
                         AccountsMovementsFragment::class.java.name
                     )
                     .commit()
-                frgMovementsFragment.setListener(this)
+
             } else {
 
                 val movimientosIntent = Intent(this, GlobalPositionDetailsActivity::class.java)

@@ -54,7 +54,7 @@ class AccountsFragment : Fragment(), OnClickListener {
         val listaCuentas = mbo?.getCuentas(cliente) as ArrayList<Any>
 
 
-        accountsAdapter = AccountsAdapter(listaCuentas, listener)
+        accountsAdapter = AccountsAdapter(listaCuentas, this)
 
 
         linearLayoutManager = LinearLayoutManager(context)

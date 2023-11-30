@@ -11,7 +11,7 @@ import com.example.banco_papesa.fragment.AccountsMovementsFragment
 import com.example.bancoapiprofe.pojo.Cuenta
 
 
-class GlobalPositionDetailsActivity : AppCompatActivity(), OnClickListener {
+class GlobalPositionDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGlobalPositionDetailsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,56 +21,39 @@ class GlobalPositionDetailsActivity : AppCompatActivity(), OnClickListener {
         setContentView(binding.root)
 
         val cuenta = intent.getSerializableExtra("cuenta") as Cuenta
-        val fragment = AccountsMovementsFragment.newInstance(cuenta)
-        //supportFragmentManager.findFragmentById(binding.fragmentMovement.id) as AccountsMovementsFragment
 
+        var fragment = AccountsMovementsFragment.newInstance(cuenta)
+        fragment.setFilter(-1)
         supportFragmentManager
             .beginTransaction()
             .add(binding.fragmentMovement.id, fragment, AccountsMovementsFragment::class.java.name)
             .commit()
 
-        fragment.setListener(this)
-
-
         binding.bottomNavigation?.setOnNavigationItemSelectedListener {
             it.isChecked = true
+            fragment = AccountsMovementsFragment.newInstance(cuenta)
             when (it.itemId) {
                 R.id.filter_all -> {
                     fragment.setFilter(-1)
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(binding.fragmentMovement.id, fragment)
-                        .commit()
                 }
                 R.id.filter_1 -> {
                     fragment.setFilter(0)
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(binding.fragmentMovement.id, fragment)
-                        .commit()
                 }
                 R.id.filter_2 -> {
                     fragment.setFilter(1)
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(binding.fragmentMovement.id, fragment)
-                        .commit()
                 }
                 R.id.filter_3 -> {
                     fragment.setFilter(2)
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(binding.fragmentMovement.id, fragment)
-                        .commit()
                 }
             }
-            false
+            supportFragmentManager
+                .beginTransaction()
+                .replace(binding.fragmentMovement.id, fragment, AccountsMovementsFragment::class.java.name)
+                .commitNow()
+            true
         }
     }
 
-    override fun onClick(obj: Any?) {
-        TODO("Not yet implemented")
-    }
 
 
 }
