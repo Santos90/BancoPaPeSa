@@ -1,6 +1,7 @@
 package com.example.banco_papesa.activity
 
 import android.R
+import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.banco_papesa.databinding.ActivityTransferBinding
 import com.example.bancoapiprofe.bd.MiBancoOperacional
+import com.example.bancoapiprofe.pojo.Cliente
+import com.example.bancoapiprofe.pojo.Cuenta
 
 class TransferActivity : AppCompatActivity() {
 
@@ -21,81 +24,94 @@ class TransferActivity : AppCompatActivity() {
         binding = ActivityTransferBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-    //CONSTRUCCION SPINERS
-
-
-        // Datos para el Spinner
-        val listaCuentasPropias = arrayOf("ES87 0182 6112 19 880647 9323", "ES84 0049 6752 25 769513 3798", "ES76 0128 5965 16 815893 9803", "ES42 2100 2427 02 895940 4429")
-
-        // Crear un ArrayAdapter usando los datos y un diseño predeterminado
-        val adapterCuentas = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, listaCuentasPropias)
-        // Especificar el diseño del menú desplegable
-        adapterCuentas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-        val spCuentaOrigen = binding.spCuentaOrigen
-
-
-        // Asignar el ArrayAdapter al Spinner
-        spCuentaOrigen.adapter = adapterCuentas
-
-        var seleccionOrigen = ""
-        // Manejar la selección de elementos del Spinner
-        spCuentaOrigen.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                seleccionOrigen = listaCuentasPropias[position]
-
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Acciones a realizar si no se selecciona nada
-
-            }
-        })
-
-
-        val spCuentaDestino = binding.spCuentaDestino
-
-
-        // Asignar el ArrayAdapter al Spinner
-        spCuentaDestino.adapter = adapterCuentas
-        var seleccionDestino = ""
-        // Manejar la selección de elementos del Spinner
-        spCuentaDestino.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                seleccionDestino = listaCuentasPropias[position]
-
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Acciones a realizar si no se selecciona nada
-
-            }
-        })
-
-        val listaDivisas = arrayOf("€", "$", "£", "¥")
-
-        // Crear un ArrayAdapter usando los datos y un diseño predeterminado
-        val adapterDivisas = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, listaDivisas)
-        val spDivisas = binding.spDivisa
-
-
-        // Asignar el ArrayAdapter al Spinner
-        spDivisas.adapter = adapterDivisas
-
+        //Recuperar cliente
+        val cliente = intent.getSerializableExtra("cliente") as Cliente
+        var cuentaOrigen = Cuenta()
+        var cuentaDestino = Cuenta()
         var seleccionDivisas = ""
-        // Manejar la selección de elementos del Spinner
-        spDivisas.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                seleccionDivisas = listaDivisas[position]
+        //CONSTRUCCION SPINERS
 
-            }
+        var listaSpinnerOrigen : List<String>
+        var listaSpinnerDestino : List<String>
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Acciones a realizar si no se selecciona nada
+        val listaCuentasOrigen : ArrayList<Cuenta>
+        var listaCuentasDestino : ArrayList<Cuenta>
 
-            }
-        })
+        var adapterCuentasOrigen: ArrayAdapter<Any>? = null
+        var adapterCuentasDestino: ArrayAdapter<Any>? = null
+
+        if (mbo != null && cliente != null) {
+
+            listaCuentasOrigen = mbo?.getCuentas(cliente) as ArrayList<Cuenta>
+            // Datos para el Spinner
+            listaSpinnerOrigen = listaCuentasToString(listaCuentasOrigen)
+            // Crear un ArrayAdapter usando los datos y un diseño predeterminado
+            adapterCuentasOrigen = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, listaSpinnerOrigen)
+            // Especificar el diseño del menú desplegable
+            adapterCuentasOrigen.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+
+            // Asignar el ArrayAdapter al Spinner
+            binding.spCuentaOrigen.adapter = adapterCuentasOrigen
+
+            var context: Context = this
+            // Manejar la selección de elementos del Spinner
+            binding.spCuentaOrigen.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    cuentaOrigen = listaCuentasOrigen[position]
+
+                    //Creamos el nuevo spinner a partir de la seleccion del anterior spinner. Esto evita que origen y destino sean iguales
+
+                    listaCuentasDestino = listaCuentasOrigen.minusElement(cuentaOrigen) as ArrayList<Cuenta>
+                    listaSpinnerDestino = listaCuentasToString(listaCuentasOrigen.minusElement(cuentaOrigen))
+                    adapterCuentasDestino = ArrayAdapter(context, R.layout.simple_spinner_dropdown_item, listaSpinnerDestino)
+                    // Asignar el ArrayAdapter al Spinner
+                    binding.spCuentaDestino.adapter = adapterCuentasDestino
+                    // Manejar la selección de elementos del Spinner
+                    binding.spCuentaDestino.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                            cuentaDestino = listaCuentasDestino[position]
+                        }
+                        override fun onNothingSelected(parent: AdapterView<*>?) {
+                            // Acciones a realizar si no se selecciona nada
+                        }
+                    })
+                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Acciones a realizar si no se selecciona nada
+                }
+            })
+
+
+
+            val listaDivisas = arrayOf("€", "$", "£", "¥")
+
+            // Crear un ArrayAdapter usando los datos y un diseño predeterminado
+            val adapterDivisas = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, listaDivisas)
+            val spDivisas = binding.spDivisa
+
+
+            // Asignar el ArrayAdapter al Spinner
+            spDivisas.adapter = adapterDivisas
+
+
+            // Manejar la selección de elementos del Spinner
+            spDivisas.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    seleccionDivisas = listaDivisas[position]
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Acciones a realizar si no se selecciona nada
+
+                }
+            })
+
+        }
+
+
+
 
 
         binding.rgTipoCuenta.setOnClickListener {                       //pq no va esta forma?
@@ -138,11 +154,11 @@ class TransferActivity : AppCompatActivity() {
             } else {
 
                 var resultado = "\n${getString(com.example.banco_papesa.R.string.cuenta_origen)}\n" +
-                    "$seleccionOrigen\n\n" +
+                    "${cuentaOrigen.toIban()}\n\n" +
                         getString(com.example.banco_papesa.R.string.cuenta_destino_conf)
 
                 resultado += if (binding.rbCuentaPropia.isChecked) {
-                    getString(com.example.banco_papesa.R.string.propia_txt) + "\n$seleccionDestino\n\n"
+                    getString(com.example.banco_papesa.R.string.propia_txt) + "\n${cuentaDestino.toIban()}\n\n"
                 } else {
                     getString(com.example.banco_papesa.R.string.ajena_txt) + "\n${binding.tiCuentaDestino.text}\n\n"
                 }
@@ -185,7 +201,7 @@ class TransferActivity : AppCompatActivity() {
         val dialog: AlertDialog? = builder?.create()
 
 
-        val alertDialog: AlertDialog? = this?.let {
+        val alertDialog: AlertDialog = this.let {
             val builder = AlertDialog.Builder(it)
             builder.apply {
                 setPositiveButton(R.string.ok,
@@ -206,5 +222,13 @@ class TransferActivity : AppCompatActivity() {
         alertDialog?.setMessage(message)
         alertDialog?.setTitle(title)
         alertDialog?.show()
+    }
+
+    fun listaCuentasToString(lista : List<Cuenta>) : List<String>{
+        var listaStrings = ArrayList<String>()
+        for (cuenta in lista) {
+            listaStrings.add(cuenta.toIban())
+        }
+        return  listaStrings
     }
 }

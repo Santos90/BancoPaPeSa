@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.banco_papesa.databinding.ActivityMovementsBinding
 import com.example.banco_papesa.adapter.MovementsAdapter
@@ -23,7 +22,7 @@ class MovementsActivity : AppCompatActivity(), OnClickListener {
     private lateinit var binding: ActivityMovementsBinding
     private lateinit var movementsAdapter: MovementsAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var itemDecoration: DividerItemDecoration
+    //private lateinit var itemDecoration: DividerItemDecoration
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +44,11 @@ class MovementsActivity : AppCompatActivity(), OnClickListener {
 
         movementsAdapter = MovementsAdapter(listaMovimientos, this)
         linearLayoutManager = LinearLayoutManager(this)
-        itemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+
         binding.recyclerId.apply {
             layoutManager = linearLayoutManager
             adapter = movementsAdapter
-            addItemDecoration(itemDecoration)
+            //addItemDecoration(itemDecoration)
         }
 
         //CONSTRUCCION SPINERS
@@ -57,7 +56,7 @@ class MovementsActivity : AppCompatActivity(), OnClickListener {
 
         if (listaCuentas.isNotEmpty()) {
             for (c in listaCuentas) {
-                listaCuentasSpinner.add(c.getNumeroCuenta())
+                listaCuentasSpinner.add(c.toIban())
             }
         }
         // Crear un ArrayAdapter usando los datos y un diseño predeterminado

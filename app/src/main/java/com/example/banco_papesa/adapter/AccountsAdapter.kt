@@ -13,7 +13,7 @@ import com.example.banco_papesa.databinding.ItemCuentaBinding
 import com.example.bancoapiprofe.pojo.Cuenta
 
 
-class AccountsAdapter(private val lista: ArrayList<Any>,
+class AccountsAdapter(private val lista: ArrayList<*>,
                       private val listener: OnClickListener)
     : RecyclerView.Adapter<AccountsAdapter.ViewHolder>()
 
@@ -43,7 +43,9 @@ class AccountsAdapter(private val lista: ArrayList<Any>,
 
         with(holder){
             setListener(cuenta)
-            binding.lblTitulo.text = cuenta.getNumeroCuenta()
+            binding.lblTitulo.text = cuenta.toIban()
+
+
             binding.lblSubtitulo.text = cuenta.getSaldoActual().toString()
             if (cuenta.getSaldoActual()!! < 0 )
                 binding.lblSubtitulo.setTextColor(ContextCompat.getColor(context, R.color.rojo_negativo))

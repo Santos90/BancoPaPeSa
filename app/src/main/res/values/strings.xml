@@ -46,7 +46,6 @@
     <string name="enviar_justificante_txt">"Enviar justificante: "</string>
     <string name="confirmar_transaccion_titulo_dialogo">Confirmar transacción?</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="cuenta_destino_dialogo">Cuenta destino: %1$s</string>
+    <string name="cuenta_destino_dialogo">Cuenta destino:\n%1$s</string>
 
 </resources>

@@ -2,6 +2,7 @@ package com.example.bancoapiprofe.dao
 
 import android.content.ContentValues
 import android.database.Cursor
+import android.location.GnssAntennaInfo.Listener
 import android.text.TextUtils
 import android.util.Log
 import com.example.bancoapiprofe.bd.MiBD
