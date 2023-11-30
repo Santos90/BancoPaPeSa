@@ -31,26 +31,25 @@ class TransferActivity : AppCompatActivity() {
         var seleccionDivisas = ""
         //CONSTRUCCION SPINERS
 
-        var listaSpinnerOrigen : List<String>
+        val listaSpinnerOrigen : List<String>
         var listaSpinnerDestino : List<String>
 
         val listaCuentasOrigen : ArrayList<Cuenta>
         var listaCuentasDestino : ArrayList<Cuenta>
 
-        var adapterCuentasOrigen: ArrayAdapter<Any>? = null
-        var adapterCuentasDestino: ArrayAdapter<Any>? = null
+        val adapterCuentasOrigen: ArrayAdapter<Any>
+        var adapterCuentasDestino: ArrayAdapter<Any>
 
-        if (mbo != null && cliente != null) {
+        if (mbo != null) {
 
             listaCuentasOrigen = mbo?.getCuentas(cliente) as ArrayList<Cuenta>
             // Datos para el Spinner
             listaSpinnerOrigen = listaCuentasToString(listaCuentasOrigen)
+
             // Crear un ArrayAdapter usando los datos y un diseño predeterminado
             adapterCuentasOrigen = ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, listaSpinnerOrigen)
             // Especificar el diseño del menú desplegable
             adapterCuentasOrigen.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-
             // Asignar el ArrayAdapter al Spinner
             binding.spCuentaOrigen.adapter = adapterCuentasOrigen
 
@@ -62,7 +61,7 @@ class TransferActivity : AppCompatActivity() {
 
                     //Creamos el nuevo spinner a partir de la seleccion del anterior spinner. Esto evita que origen y destino sean iguales
 
-                    listaCuentasDestino = listaCuentasOrigen.minusElement(cuentaOrigen) as ArrayList<Cuenta>
+                    listaCuentasDestino = listaCuentasOrigen.minusElement(cuentaOrigen) as ArrayList<Cuenta> //Eliminamos la cuenta origen
                     listaSpinnerDestino = listaCuentasToString(listaCuentasOrigen.minusElement(cuentaOrigen))
                     adapterCuentasDestino = ArrayAdapter(context, R.layout.simple_spinner_dropdown_item, listaSpinnerDestino)
                     // Asignar el ArrayAdapter al Spinner
@@ -83,7 +82,7 @@ class TransferActivity : AppCompatActivity() {
             })
 
 
-
+        //------------------ SPINNER DIVISAS -----------------
             val listaDivisas = arrayOf("€", "$", "£", "¥")
 
             // Crear un ArrayAdapter usando los datos y un diseño predeterminado
@@ -111,21 +110,6 @@ class TransferActivity : AppCompatActivity() {
         }
 
 
-
-
-
-        binding.rgTipoCuenta.setOnClickListener {                       //pq no va esta forma?
-            if (binding.rbCuentaAjena.isChecked) {
-                binding.spCuentaDestino.visibility = View.GONE
-                binding.tiCuentaDestino.visibility = View.VISIBLE
-            } else if (binding.rbCuentaPropia.isSelected) {
-                binding.spCuentaDestino.visibility = View.VISIBLE
-                binding.tiCuentaDestino.visibility = View.GONE
-            }
-        }
-
-
-
     /// RADIO BUTTONS.
 
         binding.rbCuentaAjena.setOnClickListener {
@@ -137,6 +121,7 @@ class TransferActivity : AppCompatActivity() {
             binding.spCuentaDestino.visibility = View.VISIBLE
             binding.tiCuentaDestino.visibility = View.INVISIBLE
         }
+    // BOTONES
 
         binding.btnEnviar.setOnClickListener {
             if (binding.tiCantidadTransferencia.text.isNullOrEmpty()) {
