@@ -13,8 +13,11 @@ import com.example.banco_papesa.databinding.ItemCuentaBinding
 import com.example.bancoapiprofe.pojo.Cuenta
 
 
-class AccountsAdapter(private val lista: ArrayList<*>, private val listener: OnClickListener):
-    RecyclerView.Adapter<AccountsAdapter.ViewHolder>(){
+class AccountsAdapter(private val lista: ArrayList<*>,
+                      private val listener: OnClickListener)
+    : RecyclerView.Adapter<AccountsAdapter.ViewHolder>()
+
+    {
 
     inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         val binding = ItemCuentaBinding.bind(view) //Vinculamos la vista a nuestro adapter

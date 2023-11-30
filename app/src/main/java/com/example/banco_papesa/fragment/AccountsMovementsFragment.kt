@@ -13,6 +13,7 @@ import com.example.banco_papesa.adapter.MovementsAdapter
 import com.example.banco_papesa.databinding.DialogMovementBinding
 import com.example.banco_papesa.databinding.FragmentAccountsMovementsBinding
 import com.example.bancoapiprofe.bd.MiBancoOperacional
+import com.example.bancoapiprofe.pojo.Cliente
 import com.example.bancoapiprofe.pojo.Cuenta
 import com.example.bancoapiprofe.pojo.Movimiento
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -40,6 +41,18 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
         }
     }
 
+    companion object {
+        fun newInstance(cuenta: Cuenta) = AccountsMovementsFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(ARG_CUENTA, cuenta)
+            }
+        }
+    }
+
+fun setListener (listener: OnClickListener){
+    this.listener = listener
+}
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,20 +76,9 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
         return binding.root
     }
 
-    companion object {
-        fun newInstance(cuenta: Cuenta) = AccountsMovementsFragment().apply {
-                arguments = Bundle().apply {
-                    putSerializable(ARG_CUENTA, cuenta)
-                }
-            }
-    }
-
-    fun setListener (listener: OnClickListener) {
-        this.listener = listener
-    }
 
     override fun onClick(obj: Any?) {
-
+        listener.onClick(obj)
         dialogBinding = DialogMovementBinding.inflate(layoutInflater)
         val movimiento = obj as Movimiento
 

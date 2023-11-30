@@ -43,15 +43,28 @@ class AccountsFragment : Fragment(), OnClickListener {
         binding = FragmentAccountsBinding.inflate(layoutInflater)
 
 
+
         val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(context)
-        val listaCuentas = mbo?.getCuentas(cliente) as ArrayList<*>
 
 
-        accountsAdapter = AccountsAdapter(listaCuentas, this)
+
+        Log.i("Cliente", cliente.toString())
+
+
+        val listaCuentas = mbo?.getCuentas(cliente) as ArrayList<Any>
+
+
+        accountsAdapter = AccountsAdapter(listaCuentas, listener)
+
+
         linearLayoutManager = LinearLayoutManager(context)
+
+
+
         binding.recyclerView.apply {
             layoutManager = linearLayoutManager
             adapter = accountsAdapter
+
         }
 
         return binding.root
@@ -70,6 +83,6 @@ class AccountsFragment : Fragment(), OnClickListener {
         this.listener = listener
     }
     override fun onClick(obj: Any?) {
-        if (listener != null) listener.onClick(obj)
+        listener?.onClick(obj)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.banco_papesa.activity
 
+import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,69 +13,62 @@ import com.example.banco_papesa.fragment.AccountsFragment
 import com.example.banco_papesa.fragment.AccountsMovementsFragment
 import com.example.bancoapiprofe.pojo.Cliente
 import com.example.bancoapiprofe.pojo.Cuenta
+import com.example.bancoapiprofe.pojo.Movimiento
 
 class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
 
     private lateinit var binding: ActivityGlobalPositionBinding
-    private lateinit var frgAccounts: AccountsFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityGlobalPositionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         //Recuperar el cliente
         val clienteLogeado = intent.getSerializableExtra("cliente") as Cliente
         //Creamos la instancia del fragment
-        frgAccounts = AccountsFragment.newInstance(clienteLogeado)
+        val frgAccounts: AccountsFragment = AccountsFragment.newInstance(clienteLogeado)
 
         supportFragmentManager
             .beginTransaction()
-            .replace(binding.fragmentContainer.id, frgAccounts, AccountsFragment::class.java.name)
+            .add(binding.fragmentContainer!!.id, frgAccounts, AccountsFragment::class.java.name)
             .commit()
 
         frgAccounts.setListener(this)
     }
 
     override fun onClick(obj: Any?) {
-
+        if (obj is Cuenta) {
+            Log.i("Tipo de objeto", "Es una Cuenta")
             //Creamos la instancia del fragment
-        var frgMovements = AccountsMovementsFragment.newInstance(obj as Cuenta)
-        var hayDetalle =
-            //supportFragmentManager.findFragmentById(R.id.fragmentMovement) != null &&
-            resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            var frgMovementsFragment = AccountsMovementsFragment.newInstance(obj as Cuenta)
 
-        if (hayDetalle) {
+            val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
-            Log.i("Landscape:", true.toString())
-            supportFragmentManager
-                .beginTransaction()
-                .replace(
-                    binding.fragmentMovement!!.id,
-                    frgMovements)
-                .commit()
 
-        } else {
-            supportFragmentManager
-                .beginTransaction()
-                .replace(
-                    binding.fragmentContainer!!.id,
-                    frgMovements
-                )
-                .addToBackStack(null)
-                .commit()
-            Log.i("Landscape:", false.toString())
-        }
-        frgMovements.setListener(this)
 
-        Toast.makeText(this, (obj as Cuenta).getNumeroCuenta(), Toast.LENGTH_SHORT).show()
-    }
+            if (isLandscape) {
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
-        } else {
-            super.onBackPressed()
-        }
+                Log.i("Landscape:", true.toString())
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(
+                        binding.fragmentMovement!!.id,
+                        frgMovementsFragment,
+                        AccountsMovementsFragment::class.java.name
+                    )
+                    .commit()
+                frgMovementsFragment.setListener(this)
+            } else {
+
+                val movimientosIntent = Intent(this, GlobalPositionDetailsActivity::class.java)
+                movimientosIntent.putExtra("cuenta", obj as Cuenta)
+                startActivity(movimientosIntent)
+
+            }
+        } else if (obj is Movimiento) Log.i("Tipo de objeto", "Es un Movimiento")
+
+
     }
 }
