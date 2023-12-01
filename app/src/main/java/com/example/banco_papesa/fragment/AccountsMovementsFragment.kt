@@ -104,7 +104,6 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
                 //Código a ejecutar en caso de Aceptar
                 dialog.cancel()
             })
-            .setCancelable(false)//No podrá desaparecer el diálogo por ningún motivo
             .show()
     }
 }
