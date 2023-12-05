@@ -5,12 +5,11 @@ import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import com.example.banco_papesa.R
 import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.databinding.ActivityGlobalPositionBinding
 import com.example.banco_papesa.fragment.AccountsFragment
 import com.example.banco_papesa.fragment.AccountsMovementsFragment
+import com.example.banco_papesa.fragment.FilterMovementsFragment
 import com.example.bancoapiprofe.pojo.Cliente
 import com.example.bancoapiprofe.pojo.Cuenta
 import com.example.bancoapiprofe.pojo.Movimiento
@@ -54,7 +53,7 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
                     .replace(
                         binding.fragmentMovement!!.id,
                         frgMovementsFragment,
-                        AccountsMovementsFragment::class.java.name
+                        FilterMovementsFragment::class.java.name
                     )
                     .commit()
 

@@ -12,6 +12,7 @@ import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.adapter.MovementsAdapter
 import com.example.banco_papesa.databinding.DialogMovementBinding
 import com.example.banco_papesa.databinding.FragmentAccountsMovementsBinding
+import com.example.banco_papesa.databinding.FragmentFilterMovementsBinding
 import com.example.bancoapiprofe.bd.MiBancoOperacional
 import com.example.bancoapiprofe.pojo.Cuenta
 import com.example.bancoapiprofe.pojo.Movimiento
@@ -20,11 +21,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 private const val ARG_CUENTA = "cuenta"
 
-class AccountsMovementsFragment : Fragment(), OnClickListener {
+class FilterMovementsFragment : Fragment(), OnClickListener {
 
     private lateinit var cuenta: Cuenta
 
-    private lateinit var binding: FragmentAccountsMovementsBinding
+    private lateinit var binding: FragmentFilterMovementsBinding
     private lateinit var dialogBinding : DialogMovementBinding
 
     private lateinit var cuentaAdapter: MovementsAdapter
@@ -56,23 +57,45 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAccountsMovementsBinding.inflate(layoutInflater)
-
-        val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(context)
-        val listaMovimientos: ArrayList<Movimiento>
-        if (tipoFilto == -1) {
-            listaMovimientos = mbo?.getMovimientos(cuenta) as ArrayList<Movimiento>
-        }
-        else listaMovimientos = mbo?.getMovimientosTipo(cuenta, tipoFilto) as ArrayList<Movimiento>
-
-        cuentaAdapter = MovementsAdapter(listaMovimientos, this)
-        linearLayoutManager = LinearLayoutManager(context)
+        binding = FragmentFilterMovementsBinding.inflate(layoutInflater)
 
 
-        binding.recyclerView.apply {
-            layoutManager = linearLayoutManager
-            adapter = cuentaAdapter
+        var fragment = AccountsMovementsFragment.newInstance(cuenta)
+        fragment.setFilter(-1)
 
+
+        childFragmentManager
+            .beginTransaction()
+            .add(binding.fragmentMovement.id, fragment, FilterMovementsFragment::class.java.name)
+            .commit()
+        binding.bottomNavigation?.visibility = View.INVISIBLE
+
+        binding.bottomNavigation?.setOnNavigationItemSelectedListener {
+            it.isChecked = true
+            fragment = AccountsMovementsFragment.newInstance(cuenta)
+            when (it.itemId) {
+                R.id.filter_all -> {
+                    fragment.setFilter(-1)
+                }
+
+                R.id.filter_1 -> {
+                    fragment.setFilter(0)
+                }
+
+                R.id.filter_2 -> {
+                    fragment.setFilter(1)
+                }
+
+                R.id.filter_3 -> {
+                    fragment.setFilter(2)
+                }
+            }
+
+            childFragmentManager
+                .beginTransaction()
+                .replace(binding.fragmentMovement.id, fragment, FilterMovementsFragment::class.java.name)
+                .commitNow()
+            true
         }
 
         return binding.root

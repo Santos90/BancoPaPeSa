@@ -1,5 +1,6 @@
 package com.example.banco_papesa.fragment
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,9 +11,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.adapter.AccountsAdapter
+import com.example.banco_papesa.databinding.ActivityMainBinding
 import com.example.banco_papesa.databinding.FragmentAccountsBinding
 import com.example.bancoapiprofe.bd.MiBancoOperacional
 import com.example.bancoapiprofe.pojo.Cliente
+import com.example.bancoapiprofe.pojo.Cuenta
 
 
 private const val ARG_CLIENTE = "cliente"
@@ -22,6 +25,7 @@ class AccountsFragment : Fragment(), OnClickListener {
     private lateinit var cliente : Cliente
 
     private lateinit var binding: FragmentAccountsBinding
+    private lateinit var mainBinding: ActivityMainBinding
 
     private lateinit var accountsAdapter: AccountsAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
@@ -41,6 +45,7 @@ class AccountsFragment : Fragment(), OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAccountsBinding.inflate(layoutInflater)
+        mainBinding = ActivityMainBinding.inflate(layoutInflater)
 
 
 
@@ -83,6 +88,20 @@ class AccountsFragment : Fragment(), OnClickListener {
         this.listener = listener
     }
     override fun onClick(obj: Any?) {
-        listener?.onClick(obj)
+        var frgMovementsFilter = FilterMovementsFragment.newInstance(obj as Cuenta)
+
+
+
+        Log.i("Landscape:", true.toString())
+        childFragmentManager
+            .beginTransaction()
+            .replace(
+                mainBinding.fragmentContainerBig.id,
+                frgMovementsFilter,
+                FilterMovementsFragment::class.java.name
+            )
+            .addToBackStack(null)
+            .commit()
+
     }
 }

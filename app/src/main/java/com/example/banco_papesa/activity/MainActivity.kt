@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
         frgGlobal = AccountsFragment.newInstance(cliente)
         frgGlobal.setListener(this)
 
@@ -139,7 +140,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
 
             drawerLayout.closeDrawer(GravityCompat.START)
-        } else if (supportFragmentManager.backStackEntryCount > 0) {
+        } else if (supportFragmentManager.backStackEntryCount > 1) {
             supportFragmentManager.popBackStack()
 
         } else {

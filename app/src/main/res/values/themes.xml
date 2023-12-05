@@ -3,6 +3,8 @@
     <style name="Base.Theme.Bancopapesa" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/color_principal</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="Theme.Bancopapesa" parent="Base.Theme.Bancopapesa" />
