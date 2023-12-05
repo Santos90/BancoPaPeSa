@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+
+
     <item
         android:id="@+id/nav_home"
         android:title="Home"
@@ -31,15 +36,23 @@
         android:title="@string/movimientos"
         android:icon="@drawable/ic_movements" />
 
+    </group>
 
-    <item
-        android:id="@+id/nav_settings"
-        android:title="Opciones"
-        android:icon="@drawable/ic_settings" />
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_settings"
+                android:title="Opciones"
+                android:icon="@drawable/ic_settings" />
 
-    <item
-        android:id="@+id/nav_exit"
-        android:title="@string/salir_de_la_sesion"
-        android:icon="@drawable/ic_logout" />
+            <item
+                android:id="@+id/nav_exit"
+                android:title="@string/salir_de_la_sesion"
+                android:icon="@drawable/ic_logout" />
+
+        </menu>
+
+    </item>
+
 
 </menu>

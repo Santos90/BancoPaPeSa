@@ -42,6 +42,7 @@
         app:menu="@menu/nav_menu"
         android:background="@color/white"
         app:itemIconTint="@color/black"
-        app:itemTextColor="@color/black"/>
+        app:itemTextColor="@color/black"
+        android:fitsSystemWindows="true"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

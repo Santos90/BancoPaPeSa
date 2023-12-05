@@ -20,6 +20,7 @@ import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.fragment.AccountsFragment
 import com.example.banco_papesa.fragment.AccountsMovementsFragment
 import com.example.banco_papesa.fragment.MainFragment
+import com.example.banco_papesa.fragment.TransferFragment
 import com.example.bancoapiprofe.pojo.Cuenta
 import com.example.bancoapiprofe.pojo.Movimiento
 import com.google.android.material.navigation.NavigationView
@@ -28,8 +29,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var cliente: Cliente
+
     private lateinit var frgMain: MainFragment
     private lateinit var frgGlobal: AccountsFragment
+    private lateinit var frgTrasfer: TransferFragment
 
     private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,10 +58,13 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         frgGlobal.setListener(this)
 
         frgMain = MainFragment.newInstance(cliente)
+        frgTrasfer = TransferFragment.newInstance(cliente)
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_big, frgMain).commit()
+                .replace(R.id.fragment_container_big, frgMain)
+                .addToBackStack(null)
+                .commit()
             navigationView.setCheckedItem(R.id.nav_home)
         }
     }
@@ -76,11 +82,15 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 .replace(R.id.fragment_container_big, frgMain)
                 .addToBackStack(null).commit()
             R.id.nav_global_position -> {
-                supportFragmentManager.beginTransaction().hide(frgMain).commit()
+                //supportFragmentManager.beginTransaction().hide(frgMain).commit()
                 supportFragmentManager.beginTransaction()
                     .replace(fragmentContainerAdecuado, frgGlobal)
                     .addToBackStack(null).commit()
             }
+            R.id.nav_transfer ->
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_big, frgTrasfer)
+                    .addToBackStack(null).commit()
             R.id.nav_exit -> {
                 Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
                 finish()
@@ -127,6 +137,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+
             drawerLayout.closeDrawer(GravityCompat.START)
         } else if (supportFragmentManager.backStackEntryCount > 0) {
             supportFragmentManager.popBackStack()
