@@ -1,12 +1,15 @@
 package com.example.banco_papesa.activity
 
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.banco_papesa.R
+import com.example.banco_papesa.adapter.OnClickListener
+import com.example.banco_papesa.databinding.ActivityGlobalPositionBinding
 import com.example.banco_papesa.databinding.ActivityGlobalPositionDetailsBinding
+import com.example.banco_papesa.fragment.AccountsFragment
 import com.example.banco_papesa.fragment.AccountsMovementsFragment
-import com.example.banco_papesa.fragment.FilterMovementsFragment
 import com.example.bancoapiprofe.pojo.Cuenta
 
 
@@ -25,10 +28,9 @@ class GlobalPositionDetailsActivity : AppCompatActivity() {
         fragment.setFilter(-1)
         supportFragmentManager
             .beginTransaction()
-            .add(binding.fragmentMovement.id, fragment, FilterMovementsFragment::class.java.name)
+            .add(binding.fragmentMovement.id, fragment, AccountsMovementsFragment::class.java.name)
             .commit()
-        binding.bottomNavigation?.visibility = View.INVISIBLE
-
+       // binding.bottomNavigation?.visibility = View.VISIBLE
         binding.bottomNavigation?.setOnNavigationItemSelectedListener {
             it.isChecked = true
             fragment = AccountsMovementsFragment.newInstance(cuenta)
@@ -36,23 +38,19 @@ class GlobalPositionDetailsActivity : AppCompatActivity() {
                 R.id.filter_all -> {
                     fragment.setFilter(-1)
                 }
-
                 R.id.filter_1 -> {
                     fragment.setFilter(0)
                 }
-
                 R.id.filter_2 -> {
                     fragment.setFilter(1)
                 }
-
                 R.id.filter_3 -> {
                     fragment.setFilter(2)
                 }
             }
-
             supportFragmentManager
                 .beginTransaction()
-                .replace(binding.fragmentMovement.id, fragment, FilterMovementsFragment::class.java.name)
+                .replace(binding.fragmentMovement.id, fragment, AccountsMovementsFragment::class.java.name)
                 .commitNow()
             true
         }

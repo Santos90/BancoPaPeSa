@@ -2,5 +2,6 @@ package com.example.banco_papesa.adapter
 
 
 interface OnClickListener {
-    fun onClick(obj: Any?)
+
+	fun onClick(obj: Any?)
 }

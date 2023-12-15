@@ -59,7 +59,7 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
         binding = FragmentAccountsMovementsBinding.inflate(layoutInflater)
 
         val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(context)
-        val listaMovimientos: ArrayList<Movimiento>
+        var listaMovimientos: ArrayList<Movimiento>
         if (tipoFilto == -1) {
             listaMovimientos = mbo?.getMovimientos(cuenta) as ArrayList<Movimiento>
         }
@@ -73,6 +73,39 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
             layoutManager = linearLayoutManager
             adapter = cuentaAdapter
 
+        }
+
+        binding.bottomNavigation1?.setOnNavigationItemSelectedListener {
+            it.isChecked = true
+            when (it.itemId) {
+                R.id.filter_all -> {
+                    tipoFilto = -1
+                }
+                R.id.filter_1 -> {
+                    tipoFilto = 0
+                }
+                R.id.filter_2 -> {
+                    tipoFilto =1
+                }
+                R.id.filter_3 -> {
+                    tipoFilto= 2
+                }
+            }
+            if (tipoFilto == -1) {
+                listaMovimientos = mbo?.getMovimientos(cuenta) as ArrayList<Movimiento>
+            }
+            else listaMovimientos = mbo?.getMovimientosTipo(cuenta, tipoFilto) as ArrayList<Movimiento>
+
+            cuentaAdapter = MovementsAdapter(listaMovimientos, this)
+            linearLayoutManager = LinearLayoutManager(context)
+
+
+            binding.recyclerView.apply {
+                layoutManager = linearLayoutManager
+                adapter = cuentaAdapter
+
+            }
+            true
         }
 
         return binding.root

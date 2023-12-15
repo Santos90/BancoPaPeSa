@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.banco_papesa.databinding.ActivityTransferBinding
+import com.example.banco_papesa.databinding.FragmentTransferBinding
 import com.example.bancoapiprofe.bd.MiBancoOperacional
 import com.example.bancoapiprofe.pojo.Cliente
 import com.example.bancoapiprofe.pojo.Cuenta
@@ -23,9 +24,9 @@ class TransferFragment : Fragment() {
 
 	private lateinit var cliente : Cliente
 
-	private lateinit var binding: ActivityTransferBinding
+	private lateinit var binding: FragmentTransferBinding
 
-
+	private var mbo: MiBancoOperacional? = null
 
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +38,9 @@ class TransferFragment : Fragment() {
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 								savedInstanceState: Bundle?): View? 				{
-		binding = ActivityTransferBinding.inflate(layoutInflater)
+		binding = FragmentTransferBinding.inflate(layoutInflater)
 
-		val mbo: MiBancoOperacional? = MiBancoOperacional.getInstance(context)
+		mbo = MiBancoOperacional.getInstance(context)
 
 		var cuentaOrigen = Cuenta()
 		var cuentaDestino = Cuenta()
@@ -166,11 +167,7 @@ class TransferFragment : Fragment() {
 				resultado += getString(com.example.banco_papesa.R.string.importe) + "${binding.tiCantidadTransferencia.text}$seleccionDivisas\n" +
 						getString(com.example.banco_papesa.R.string.enviar_justificante_txt) + "${binding.cbEnviarJustificante.isChecked}\n"
 
-
-				//Toast.makeText(this, resultado, Toast.LENGTH_SHORT).show()
-				//Log.i("Resultado transacción:", resultado)
-
-				dialogoDeConfirmacion(resultado, getString(com.example.banco_papesa.R.string.confirmar_transaccion_titulo_dialogo))
+				dialogoDeConfirmacion(getString(com.example.banco_papesa.R.string.confirmar_transaccion_titulo_dialogo), resultado)
 			}
 
 
@@ -188,18 +185,7 @@ class TransferFragment : Fragment() {
 		return binding.root
 	}
 
-	fun dialogoDeConfirmacion(message: String, title:String) {
-		// 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
-		val builder: AlertDialog.Builder? = this?.let {
-			context?.let { it1 -> AlertDialog.Builder(it1) }
-		}
-
-// 2. Chain together various setter methods to set the dialog characteristics
-
-
-// 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
-		val dialog: AlertDialog? = builder?.create()
-
+	fun dialogoDeConfirmacion(title:String, message: String) {
 
 		val alertDialog: AlertDialog = this.let {
 			val builder = context?.let { it1 -> AlertDialog.Builder(it1) }
@@ -207,7 +193,7 @@ class TransferFragment : Fragment() {
 				setPositiveButton(
 					R.string.ok,
 					DialogInterface.OnClickListener { dialog, id ->
-
+						//Insertar movimiento en base de datos
 					})
 				setNegativeButton(
 					R.string.cancel,
@@ -215,15 +201,12 @@ class TransferFragment : Fragment() {
 						// User cancelled the dialog
 					})
 			}
-			// Set other dialog properties
 
-
-			// Create the AlertDialog
 			builder!!.create()
 		}
-		alertDialog?.setMessage(message)
-		alertDialog?.setTitle(title)
-		alertDialog?.show()
+		alertDialog.setMessage(message)
+		alertDialog.setTitle(title)
+		alertDialog.show()
 	}
 
 	fun listaCuentasToString(lista : List<Cuenta>) : List<String>{

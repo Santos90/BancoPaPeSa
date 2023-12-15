@@ -131,7 +131,7 @@ class MovimientoDAO : PojoDAO {
         return listaMovimientos
     }
 
-    fun     getMovimientos(cuenta: Cuenta?): ArrayList<*> {
+    fun getMovimientos(cuenta: Cuenta?): ArrayList<*> {
         val listaMovimientos = ArrayList<Movimiento>()
         val condicion = "idcuentaorigen=" + String.valueOf(cuenta?.getId() ?: -1)
         val columnas = arrayOf(

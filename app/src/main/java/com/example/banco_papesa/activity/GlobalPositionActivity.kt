@@ -55,6 +55,7 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
                         frgMovementsFragment,
                         FilterMovementsFragment::class.java.name
                     )
+
                     .commit()
 
             } else {

@@ -10,6 +10,7 @@ import com.example.bancoapiprofe.pojo.Cliente
 
 
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -20,6 +21,8 @@ import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.fragment.AccountsFragment
 import com.example.banco_papesa.fragment.AccountsMovementsFragment
 import com.example.banco_papesa.fragment.MainFragment
+import com.example.banco_papesa.fragment.MovementsFragment
+import com.example.banco_papesa.fragment.PasswordChangeFragment
 import com.example.banco_papesa.fragment.TransferFragment
 import com.example.bancoapiprofe.pojo.Cuenta
 import com.example.bancoapiprofe.pojo.Movimiento
@@ -33,6 +36,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     private lateinit var frgMain: MainFragment
     private lateinit var frgGlobal: AccountsFragment
     private lateinit var frgTrasfer: TransferFragment
+    private lateinit var frgPassword: PasswordChangeFragment
+    private lateinit var frdMovments: MovementsFragment
 
     private lateinit var drawerLayout: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +45,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
 
-        cliente = intent.getSerializableExtra("cliente") as Cliente
+        cliente = intent.
+        getSerializableExtra("cliente") as Cliente
 
 
         drawerLayout = findViewById<DrawerLayout>(mainBinding.drawerLayout.id)
@@ -54,17 +60,17 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
         frgGlobal = AccountsFragment.newInstance(cliente)
         frgGlobal.setListener(this)
 
         frgMain = MainFragment.newInstance(cliente)
         frgTrasfer = TransferFragment.newInstance(cliente)
+        frgPassword = PasswordChangeFragment.newInstance(cliente)
+        frdMovments = MovementsFragment.newInstance(cliente)
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_big, frgMain)
-                .addToBackStack(null)
                 .commit()
             navigationView.setCheckedItem(R.id.nav_home)
         }
@@ -78,19 +84,30 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         } else Log.i("Orientacion", "Vertical")
 
         when (item.itemId) {
-            R.id.nav_home ->
+            R.id.nav_home -> {
                 supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_big, frgMain)
-                .addToBackStack(null).commit()
+                    .replace(R.id.fragment_container_big, frgMain)
+                    .addToBackStack(null).commit()
+            }
             R.id.nav_global_position -> {
                 //supportFragmentManager.beginTransaction().hide(frgMain).commit()
                 supportFragmentManager.beginTransaction()
                     .replace(fragmentContainerAdecuado, frgGlobal)
                     .addToBackStack(null).commit()
             }
+
             R.id.nav_transfer ->
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container_big, frgTrasfer)
+                    .addToBackStack(null).commit()
+
+            R.id.nav_password_change ->
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_big, frgPassword)
+                    .addToBackStack(null).commit()
+            R.id.nav_movements ->
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_big, frdMovments)
                     .addToBackStack(null).commit()
             R.id.nav_exit -> {
                 Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
@@ -128,7 +145,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                         mainBinding.fragmentContainerBig.id,
                         frgMovements
                     )
-                    .addToBackStack(null)
+                    .addToBackStack("movimientos")
                     .commit()
                 Log.i("Landscape:", false.toString())
             }
@@ -140,7 +157,8 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
 
             drawerLayout.closeDrawer(GravityCompat.START)
-        } else if (supportFragmentManager.backStackEntryCount > 1) {
+        } else if (supportFragmentManager.backStackEntryCount > 0) {
+
             supportFragmentManager.popBackStack()
 
         } else {
