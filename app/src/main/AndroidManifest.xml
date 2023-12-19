@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bancopapesa"
         tools:targetApi="31">
-
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".activity.MovementsActivity"
             android:exported="false" />
