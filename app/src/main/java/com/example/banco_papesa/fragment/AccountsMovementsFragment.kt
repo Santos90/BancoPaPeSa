@@ -40,7 +40,7 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
     }
 
     companion object {
-        fun newInstance(cuenta: Cuenta) = FilterMovementsFragment().apply {
+        fun newInstance(cuenta: Cuenta) = AccountsMovementsFragment().apply {
             arguments = Bundle().apply {
                 putSerializable(ARG_CUENTA, cuenta)
             }
@@ -75,26 +75,28 @@ class AccountsMovementsFragment : Fragment(), OnClickListener {
 
         }
 
-        binding.bottomNavigation1?.setOnNavigationItemSelectedListener {
+        binding.bottomNavigation.setOnNavigationItemSelectedListener {
             it.isChecked = true
             when (it.itemId) {
                 R.id.filter_all -> {
                     tipoFilto = -1
                 }
+
                 R.id.filter_1 -> {
                     tipoFilto = 0
                 }
+
                 R.id.filter_2 -> {
                     tipoFilto =1
                 }
+
                 R.id.filter_3 -> {
                     tipoFilto= 2
                 }
             }
             if (tipoFilto == -1) {
                 listaMovimientos = mbo?.getMovimientos(cuenta) as ArrayList<Movimiento>
-            }
-            else listaMovimientos = mbo?.getMovimientosTipo(cuenta, tipoFilto) as ArrayList<Movimiento>
+            } else listaMovimientos = mbo?.getMovimientosTipo(cuenta, tipoFilto) as ArrayList<Movimiento>
 
             cuentaAdapter = MovementsAdapter(listaMovimientos, this)
             linearLayoutManager = LinearLayoutManager(context)

@@ -88,20 +88,24 @@ class AccountsFragment : Fragment(), OnClickListener {
         this.listener = listener
     }
     override fun onClick(obj: Any?) {
+        listener.onClick(obj)
+/*
         var frgMovementsFilter = FilterMovementsFragment.newInstance(obj as Cuenta)
-
-
 
         Log.i("Landscape:", true.toString())
         childFragmentManager
             .beginTransaction()
             .replace(
-                mainBinding.fragmentContainerBig.id,
+                mainBinding.fragmentContainerBig!!.id,
                 frgMovementsFilter,
                 FilterMovementsFragment::class.java.name
             )
             .addToBackStack(null)
             .commit()
+
+ */
+
+
 
     }
 }

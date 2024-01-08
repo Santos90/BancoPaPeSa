@@ -1,12 +1,24 @@
 <resources>
     <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+    <string-array name="idioma">
+
+        <item>Idioma del Sistema</item>
+        <item>Español</item>
+        <item>Inglés</item>
+    </string-array>
+    <string-array name="codigo_idioma">
+        <item>SO_LANGUAGE</item>
+        <item>ES</item>
+        <item>EN</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <string-array name="origen_datos">
+        <item>Base de datos local</item>
+        <item>Servicio Web</item>
     </string-array>
+    <string-array name="codigo_origen_datos">
+        <item>local</item>
+        <item>web</item>
+    </string-array>
+
 </resources>

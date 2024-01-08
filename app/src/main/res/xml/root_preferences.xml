@@ -1,35 +1,41 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header">
+    <PreferenceCategory app:title="Opciones">
 
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
+
+        <ListPreference
+            app:key="idioma"
+            app:defaultValue="SO_LANGUAGE"
+            app:entries="@array/idioma"
+            app:entryValues="@array/codigo_idioma"
+
+            app:title="Idioma de la aplicación"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
+            app:defaultValue="local"
+            app:entries="@array/origen_datos"
+            app:entryValues="@array/codigo_origen_datos"
+            app:key="datos"
+            app:title="Origen de la base de datos"
             app:useSimpleSummaryProvider="true" />
 
-    </PreferenceCategory>
+        <SwitchPreferenceCompat
 
-    <PreferenceCategory app:title="@string/sync_header">
+            app:key="musica"
+            app:summaryOff="Desactivada"
+            app:summaryOn="Activada"
+            app:title="Música ambiental" />
 
         <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
 
-        <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+            app:key="animacion"
+            app:summaryOff="Desactivada"
+            app:summaryOn="Activada"
+            app:title="Animación inicial" />
 
     </PreferenceCategory>
+
+
 
 </PreferenceScreen>

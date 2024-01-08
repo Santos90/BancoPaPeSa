@@ -40,13 +40,13 @@
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/lblSubtitulo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigation1"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         android:layout_marginTop="@dimen/common_margin_default"
         android:padding="@dimen/minium_margin"
         tools:listitem="@layout/item_movimiento"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation1"
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/detail_movements_menu"

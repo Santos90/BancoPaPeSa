@@ -1,12 +1,15 @@
 package com.example.banco_papesa.activity
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import com.example.banco_papesa.R
+import com.example.banco_papesa.Utils.MyMediaPlayer
 import com.example.banco_papesa.databinding.ActivityLoginBinding
 import com.example.bancoapiprofe.bd.MiBancoOperacional
 import com.example.bancoapiprofe.pojo.Cliente
@@ -15,10 +18,18 @@ import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+
+    private lateinit var mediaPlayer : MyMediaPlayer
+    private var tiempoMusica: Int = 0
+
+    private lateinit var pref: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this@LoginActivity)
 
         var pass: String
         var dni: String
@@ -42,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
                 Log.i("Cliente", clienteDevuelto.toString())
                 val mainIntent = Intent(this, MainActivity::class.java)
                 mainIntent.putExtra("cliente", clienteDevuelto)
+
                 startActivity(mainIntent)
 
             } else {
@@ -117,4 +129,33 @@ class LoginActivity : AppCompatActivity() {
         */
         return true
     }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i("Musica", pref.getBoolean("musica", true).toString())
+        if (pref.getBoolean("musica", true)) {
+            mediaPlayer = MyMediaPlayer.getInstance(this, R.raw.bossa_nova)
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (pref.getBoolean("musica", true)) {
+            mediaPlayer.playMusic()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (pref.getBoolean("musica", true)) {
+            mediaPlayer.pauseMusic()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        //mediaPlayer? = null
+    }
 }
+
