@@ -8,8 +8,8 @@
     </string-array>
     <string-array name="codigo_idioma">
         <item>SO_LANGUAGE</item>
-        <item>ES</item>
-        <item>EN</item>
+        <item>es</item>
+        <item>en</item>
     </string-array>
 
     <string-array name="origen_datos">

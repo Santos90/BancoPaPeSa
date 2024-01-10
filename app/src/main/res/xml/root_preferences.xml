@@ -9,7 +9,7 @@
             app:entries="@array/idioma"
             app:entryValues="@array/codigo_idioma"
 
-            app:title="Idioma de la aplicación"
+            app:title="@string/idioma_aplicacion"
             app:useSimpleSummaryProvider="true" />
 
         <ListPreference
@@ -17,7 +17,7 @@
             app:entries="@array/origen_datos"
             app:entryValues="@array/codigo_origen_datos"
             app:key="datos"
-            app:title="Origen de la base de datos"
+            app:title="@string/origen_bd"
             app:useSimpleSummaryProvider="true" />
 
         <SwitchPreferenceCompat
@@ -25,14 +25,14 @@
             app:key="musica"
             app:summaryOff="Desactivada"
             app:summaryOn="Activada"
-            app:title="Música ambiental" />
+            app:title="@string/musica_ambiental" />
 
         <SwitchPreferenceCompat
 
             app:key="animacion"
             app:summaryOff="Desactivada"
             app:summaryOn="Activada"
-            app:title="Animación inicial" />
+            app:title="@string/animacion_inicial" />
 
     </PreferenceCategory>
 

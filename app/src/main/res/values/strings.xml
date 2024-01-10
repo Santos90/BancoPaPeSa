@@ -70,4 +70,8 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="idioma_aplicacion">Idioma de la aplicación</string>
+    <string name="origen_bd">Origen de la base de datos</string>
+    <string name="musica_ambiental">Música ambiental</string>
+    <string name="animacion_inicial">Animación inicial</string>
 </resources>
