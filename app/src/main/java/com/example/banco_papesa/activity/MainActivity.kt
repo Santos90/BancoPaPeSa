@@ -19,6 +19,7 @@ import com.example.banco_papesa.R
 import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.fragment.AccountsFragment
 import com.example.banco_papesa.fragment.AccountsMovementsFragment
+import com.example.banco_papesa.fragment.CajerosFragment
 import com.example.banco_papesa.fragment.MainFragment
 import com.example.banco_papesa.fragment.MovementsFragment
 import com.example.banco_papesa.fragment.PasswordChangeFragment
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 	private lateinit var frgPassword: PasswordChangeFragment
 	private lateinit var frgMovments: MovementsFragment
 	private lateinit var frgSettings: SettingsActivity.SettingsFragment
+	private lateinit var frgCajeros: CajerosFragment
 
 
 	private lateinit var drawerLayout: DrawerLayout
@@ -68,6 +70,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 		frgTrasfer = TransferFragment.newInstance(cliente)
 		frgPassword = PasswordChangeFragment.newInstance(cliente)
 		frgMovments = MovementsFragment.newInstance(cliente)
+		frgCajeros = CajerosFragment()
 
 		frgSettings = SettingsActivity.SettingsFragment()
 
@@ -111,6 +114,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 			R.id.nav_movements ->
 				supportFragmentManager.beginTransaction()
 					.replace(R.id.fragment_container_big, frgMovments)
+					.addToBackStack(null).commit()
+			R.id.nav_atm ->
+				supportFragmentManager.beginTransaction()
+					.replace(R.id.fragment_container_big, frgCajeros)
 					.addToBackStack(null).commit()
 			R.id.nav_settings ->
 				supportFragmentManager.beginTransaction()

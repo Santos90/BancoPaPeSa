@@ -1,11 +1,13 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+
+    id "com.google.devtools.ksp"
 }
 
 android {
     namespace 'com.example.banco_papesa'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.banco_papesa"
@@ -55,4 +57,8 @@ dependencies {
 
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+    var roomVersion = "2.6.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
 }
