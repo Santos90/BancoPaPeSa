@@ -66,8 +66,8 @@ class CajeroAdapter(private var lista: MutableList<CajeroEntity>,
         notifyItemInserted(lista.size-1) //Refresca la vista del adaptador
     }
 
-    fun setStores(stores: MutableList<CajeroEntity>) {
-        lista = stores
+    fun setCajero(cajero: MutableList<CajeroEntity>) {
+        lista = cajero
         notifyDataSetChanged()
     }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.banco_papesa.R
+import com.example.banco_papesa.activity.MainActivity
 import com.example.banco_papesa.adapter.CajeroAdapter
 import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.database.BankApplication
@@ -14,10 +15,12 @@ import com.example.banco_papesa.databinding.FragmentCajerosBinding
 import com.example.banco_papesa.pojo.CajeroEntity
 import java.util.concurrent.LinkedBlockingDeque
 
-class CajerosFragment : Fragment(), OnClickListener {
+class CajerosListFragment : Fragment(), OnClickListener {
 	private lateinit var binding: FragmentCajerosBinding
 	private lateinit var mAdapter: CajeroAdapter
 	private lateinit var mGridLayout: GridLayoutManager
+
+	private lateinit var mActivity: MainActivity
 
 
 	override fun onCreateView(
@@ -31,32 +34,28 @@ class CajerosFragment : Fragment(), OnClickListener {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		setupRecyclerView()
+
+		mActivity = activity as MainActivity
+		mActivity?.supportActionBar?.title = "Cajeros"
+
 
 		binding.addCajero.setOnClickListener {
-			val cola = LinkedBlockingDeque<MutableList<CajeroEntity>>()
-			Thread {
-				val cajerosEntityLists : MutableList<CajeroEntity> = mutableListOf(
-					CajeroEntity(1, "Carrer del Clariano, 1, 46021 Valencia, Valencia, España",
-						39.47600769999999, -0.3524475000000393, ""),
-					CajeroEntity(2, "Avinguda del Cardenal Benlloch, 65, 46021 València, Valencia, España",
-						39.4710366, -0.3547525000000178, ""),
-					CajeroEntity(3, "Av. del Port, 237, 46011 València, Valencia, España",
-						39.46161999999999, -0.3376299999999901, ""),
-					CajeroEntity(4, "Carrer del Batxiller, 6, 46010 València, Valencia, España",
-						39.4826729, -0.3639118999999482, ""),
-					CajeroEntity(5, "Av. del Regne de València, 2, 46005 València, Valencia, España",
-						39.4647669, -0.3732760000000326, "")
-				)
-				cola.add(cajerosEntityLists)
-			}.start()
-
-			BankApplication.database.cajeroDAO().insertAll(cola.take())
+			val frgFormCajero = CajeroFormFragment()
+			launchFragment(frgFormCajero)
 		}
+
+	}
+
+	private fun launchFragment(fragment : Fragment) {
+		mActivity.supportFragmentManager.beginTransaction()
+			.replace(R.id.fragment_container_big, fragment)
+			.addToBackStack(null).commit()
 	}
 
 	private fun setupRecyclerView() {
 		mAdapter = CajeroAdapter(mutableListOf(), this)
-		mGridLayout = GridLayoutManager(context, 2)
+		mGridLayout = GridLayoutManager(context, 1)
 		getCajeros()
 		binding.recycledView.apply {
 			setHasFixedSize(true)
@@ -72,11 +71,22 @@ class CajerosFragment : Fragment(), OnClickListener {
 			cola.add(stores)
 
 		}.start()
-		mAdapter.setStores(cola.take())
+		mAdapter.setCajero(cola.take())
 	}
 
+
 	override fun onClick(obj: Any?) {
-		TODO("Not yet implemented")
+		var args = Bundle()
+		args.putSerializable("store", obj as CajeroEntity )
+
+
+		val frgFormCajero = CajeroFormFragment()
+		if (args != null) frgFormCajero.arguments = args
+
+		mActivity.supportFragmentManager.beginTransaction()
+			.add(R.id.fragment_container_big, frgFormCajero)
+			.addToBackStack(null)
+			.commit()
 	}
 
 

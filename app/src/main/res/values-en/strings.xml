@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bank-papesa</string>
+    <string name="app_name">Bank-Pau</string>
     <string name="input_dni">Enter your DNI</string>
     <string name="btn_entrar">Login</string>
     <string name="btn_salir">Exit</string>

@@ -15,11 +15,12 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import com.example.banco_papesa.R
 import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.fragment.AccountsFragment
 import com.example.banco_papesa.fragment.AccountsMovementsFragment
-import com.example.banco_papesa.fragment.CajerosFragment
+import com.example.banco_papesa.fragment.CajerosListFragment
 import com.example.banco_papesa.fragment.MainFragment
 import com.example.banco_papesa.fragment.MovementsFragment
 import com.example.banco_papesa.fragment.PasswordChangeFragment
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 	private lateinit var frgPassword: PasswordChangeFragment
 	private lateinit var frgMovments: MovementsFragment
 	private lateinit var frgSettings: SettingsActivity.SettingsFragment
-	private lateinit var frgCajeros: CajerosFragment
+	private lateinit var frgCajeros: CajerosListFragment
 
 
 	private lateinit var drawerLayout: DrawerLayout
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 		frgTrasfer = TransferFragment.newInstance(cliente)
 		frgPassword = PasswordChangeFragment.newInstance(cliente)
 		frgMovments = MovementsFragment.newInstance(cliente)
-		frgCajeros = CajerosFragment()
+		frgCajeros = CajerosListFragment()
 
 		frgSettings = SettingsActivity.SettingsFragment()
 
@@ -90,39 +91,13 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 		} else Log.i("Orientacion", "Vertical")
 
 		when (item.itemId) {
-			R.id.nav_home -> {
-				supportFragmentManager.beginTransaction()
-					.replace(R.id.fragment_container_big, frgMain)
-					.addToBackStack(null).commit()
-			}
-			R.id.nav_global_position -> {
-				//supportFragmentManager.beginTransaction().hide(frgMain).commit()
-				supportFragmentManager.beginTransaction()
-					.replace(fragmentContainerAdecuado, frgGlobal)
-					.addToBackStack(null).commit()
-			}
-
-			R.id.nav_transfer ->
-				supportFragmentManager.beginTransaction()
-					.replace(R.id.fragment_container_big, frgTrasfer)
-					.addToBackStack(null).commit()
-
-			R.id.nav_password_change ->
-				supportFragmentManager.beginTransaction()
-					.replace(R.id.fragment_container_big, frgPassword)
-					.addToBackStack(null).commit()
-			R.id.nav_movements ->
-				supportFragmentManager.beginTransaction()
-					.replace(R.id.fragment_container_big, frgMovments)
-					.addToBackStack(null).commit()
-			R.id.nav_atm ->
-				supportFragmentManager.beginTransaction()
-					.replace(R.id.fragment_container_big, frgCajeros)
-					.addToBackStack(null).commit()
-			R.id.nav_settings ->
-				supportFragmentManager.beginTransaction()
-					.replace(R.id.fragment_container_big, frgSettings)
-					.addToBackStack(null).commit()
+			R.id.nav_home -> 			launchFragment(frgMain)
+			R.id.nav_global_position -> launchFragment(frgGlobal)
+			R.id.nav_transfer -> 		launchFragment(frgTrasfer)
+			R.id.nav_password_change -> launchFragment(frgPassword)
+			R.id.nav_movements -> 		launchFragment(frgMovments)
+			R.id.nav_atm -> 			launchFragment(frgCajeros)
+			R.id.nav_settings -> 		launchFragment(frgSettings)
 			R.id.nav_exit -> {
 				Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
 				finish()
@@ -132,6 +107,12 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 		drawerLayout.closeDrawer(GravityCompat.START)
 		return true
 
+	}
+
+	private fun launchFragment(fragment : Fragment) {
+		supportFragmentManager.beginTransaction()
+			.replace(R.id.fragment_container_big, fragment)
+			.addToBackStack(null).commit()
 	}
 
 	override fun onClick(obj: Any?) {
