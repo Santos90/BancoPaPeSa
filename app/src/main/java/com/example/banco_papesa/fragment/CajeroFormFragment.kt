@@ -26,25 +26,28 @@ class CajeroFormFragment : Fragment() {
 
     private var editCajero : CajeroEntity? = null
     private var idCajeroSeleccionado = -1L
+    @SuppressLint("RestrictedApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCajeroFormBinding.inflate(inflater)
 
-        return binding.root
-    }
-
-    @SuppressLint("RestrictedApi")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         mActivity = activity as MainActivity
-        frgListCajeros = mActivity.supportFragmentManager.findFragmentByTag("CajerosListFragment") as? CajerosListFragment
+        frgListCajeros = mActivity.supportFragmentManager.findFragmentByTag("CajerosListFragment") as CajerosListFragment
         mActivity.supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
         setHasOptionsMenu(true)
 
         idCajeroSeleccionado = arguments?.getLong("idCajeroSeleccionado") ?: -1L
+
+        return binding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
 
         if (idCajeroSeleccionado != -1L) {
             val cola = LinkedBlockingDeque<CajeroEntity>()

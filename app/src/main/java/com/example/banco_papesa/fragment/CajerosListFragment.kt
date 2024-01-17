@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.replace
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.banco_papesa.R
 import com.example.banco_papesa.activity.MainActivity
@@ -45,12 +46,6 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 		super.onViewCreated(view, savedInstanceState)
 	}
 
-	private fun launchFragment(fragment : Fragment) {
-		mActivity.supportFragmentManager.beginTransaction()
-			.replace(R.id.fragment_container_big, fragment)
-			.addToBackStack(null).commit()
-	}
-
 	private fun setupRecyclerView() {
 		mAdapter = CajeroAdapter(mutableListOf(), this)
 		mGridLayout = GridLayoutManager(context, 1)
@@ -81,10 +76,20 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 		val frgFormCajero = CajeroFormFragment()
 		if (args != null) frgFormCajero.arguments = args
 
+		/*
 		mActivity.supportFragmentManager.beginTransaction()
 			.add(R.id.fragment_container_big, frgFormCajero, "CajerosListFragment")
 			.addToBackStack(null)
 			.commit()
+		 */
+
+		launchFragment(frgFormCajero)
+	}
+
+	private fun launchFragment(fragment : Fragment) {
+		mActivity.supportFragmentManager.beginTransaction()
+			.replace(R.id.fragment_container_big, fragment)
+			.addToBackStack(null).commit()
 	}
 
 	override fun setVisibilityFAB(isVisible: Boolean) {

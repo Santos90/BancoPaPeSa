@@ -96,7 +96,11 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 			R.id.nav_transfer -> 		launchFragment(frgTrasfer)
 			R.id.nav_password_change -> launchFragment(frgPassword)
 			R.id.nav_movements -> 		launchFragment(frgMovments)
-			R.id.nav_atm -> 			launchFragment(frgCajeros)
+			R.id.nav_atm -> {
+				supportFragmentManager.beginTransaction()
+					.add(R.id.fragment_container_big, frgCajeros, "CajerosListFragment")
+					.addToBackStack(null).commit()
+			}
 			R.id.nav_settings -> 		launchFragment(frgSettings)
 			R.id.nav_exit -> {
 				Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()

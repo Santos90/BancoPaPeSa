@@ -12,8 +12,18 @@ class CajeroEntity (
 	var latitud : Double = 0.0,
 	var longitud : Double = 0.0,
 	var zoom : String = ""
-) : Serializable {
+)  {
+	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
+		if (javaClass != other?.javaClass) return false
 
-	//Para ello, crearemos la entidad Cajeros, de los cuales guardaremos su id (que se autogenerará por
-	//Room), la dirección (String), la latitud (Double), la longitud (Double) y el zoom (String.
+		other as CajeroEntity
+
+		return id == other.id
+	}
+
+	override fun hashCode(): Int {
+		return id.hashCode()
+	}
+
 }

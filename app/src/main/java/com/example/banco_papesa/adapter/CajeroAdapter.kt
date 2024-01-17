@@ -1,6 +1,7 @@
 package com.example.banco_papesa.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,10 +75,10 @@ class CajeroAdapter(private var lista: MutableList<CajeroEntity>,
     fun update(original: CajeroEntity, editado: CajeroEntity) {
 
         val index = lista.indexOf(original)
-
+        Log.i("Indice update", index.toString())
         if (index != -1) {
             lista[index] = editado
-            notifyItemChanged(index)
+            notifyDataSetChanged()
 
         }
     }
