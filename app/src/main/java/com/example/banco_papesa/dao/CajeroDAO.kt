@@ -25,10 +25,13 @@ interface CajeroDAO {
 	fun insertAll(CajeroEntityList : List<CajeroEntity>)
 
 	@Update
-	fun updateStore (cajeroEntity: CajeroEntity)
+	fun updateCajero (cajeroEntity: CajeroEntity)
 
 	@Delete
-	fun deleteStore (cajeroEntity: CajeroEntity)
+	fun deleteCajero (cajeroEntity: CajeroEntity)
+
+	@Query("SELECT * From CajeroEntity c WHERE c.id = :id ")
+	fun getById(id : Long) : CajeroEntity
 
 
 }

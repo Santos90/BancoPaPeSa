@@ -39,7 +39,15 @@ class PasswordChangeFragment : Fragment() {
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
 							  savedInstanceState: Bundle?): View? 				{
 		binding = FragmentPasswordChangeBinding	.inflate(layoutInflater)
+		binding.btnSalir.setOnClickListener {
 
+
+		}
+
+		binding.btnCambiarContrasenya.setOnClickListener {
+
+
+		}
 
 		return binding.root
 	}

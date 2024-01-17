@@ -71,12 +71,12 @@ class CajeroAdapter(private var lista: MutableList<CajeroEntity>,
         notifyDataSetChanged()
     }
 
-    fun update(obj: CajeroEntity) {
-        val store = obj as CajeroEntity
-        val index = lista.indexOf(store)
+    fun update(original: CajeroEntity, editado: CajeroEntity) {
+
+        val index = lista.indexOf(original)
 
         if (index != -1) {
-            lista.set(index, store)
+            lista[index] = editado
             notifyItemChanged(index)
 
         }

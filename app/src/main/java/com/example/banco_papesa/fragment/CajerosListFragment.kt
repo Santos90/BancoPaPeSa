@@ -9,13 +9,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.banco_papesa.R
 import com.example.banco_papesa.activity.MainActivity
 import com.example.banco_papesa.adapter.CajeroAdapter
+import com.example.banco_papesa.adapter.ListaCajerosAux
 import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.database.BankApplication
 import com.example.banco_papesa.databinding.FragmentCajerosBinding
 import com.example.banco_papesa.pojo.CajeroEntity
 import java.util.concurrent.LinkedBlockingDeque
 
-class CajerosListFragment : Fragment(), OnClickListener {
+class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 	private lateinit var binding: FragmentCajerosBinding
 	private lateinit var mAdapter: CajeroAdapter
 	private lateinit var mGridLayout: GridLayoutManager
@@ -29,22 +30,19 @@ class CajerosListFragment : Fragment(), OnClickListener {
 	): View? {
 		// Inflate the layout for this fragment
 		binding = FragmentCajerosBinding.inflate(layoutInflater)
+		setupRecyclerView()
 		return binding.root
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
-		setupRecyclerView()
-
 		mActivity = activity as MainActivity
 		mActivity?.supportActionBar?.title = "Cajeros"
-
 
 		binding.addCajero.setOnClickListener {
 			val frgFormCajero = CajeroFormFragment()
 			launchFragment(frgFormCajero)
 		}
-
+		super.onViewCreated(view, savedInstanceState)
 	}
 
 	private fun launchFragment(fragment : Fragment) {
@@ -77,16 +75,41 @@ class CajerosListFragment : Fragment(), OnClickListener {
 
 	override fun onClick(obj: Any?) {
 		var args = Bundle()
-		args.putSerializable("store", obj as CajeroEntity )
+		args.putLong("idCajeroSeleccionado", (obj as CajeroEntity).id )
 
 
 		val frgFormCajero = CajeroFormFragment()
 		if (args != null) frgFormCajero.arguments = args
 
 		mActivity.supportFragmentManager.beginTransaction()
-			.add(R.id.fragment_container_big, frgFormCajero)
+			.add(R.id.fragment_container_big, frgFormCajero, "CajerosListFragment")
 			.addToBackStack(null)
 			.commit()
+	}
+
+	override fun setVisibilityFAB(isVisible: Boolean) {
+		if (isVisible)
+			binding.addCajero.show()
+		else
+			binding.addCajero.hide()
+	}
+
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
+		outState.putAll(outState)
+	}
+
+	override fun addCajero(cajero: CajeroEntity) {
+		mAdapter.add(cajero)
+	}
+
+	override fun updateCajero(cajero: CajeroEntity, editado: CajeroEntity) {
+
+		mAdapter.update(cajero, editado)
+	}
+
+	override fun deleteStore(cajero: CajeroEntity) {
+		mAdapter.delete(cajero)
 	}
 
 

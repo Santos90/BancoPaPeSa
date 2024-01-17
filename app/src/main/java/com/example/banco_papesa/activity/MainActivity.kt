@@ -148,6 +148,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 	}
 
 
+	@Deprecated("Deprecated in Java")
 	override fun onBackPressed() {
 		if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
 
