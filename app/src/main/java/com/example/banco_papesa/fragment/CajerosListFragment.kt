@@ -26,7 +26,7 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 	private lateinit var mGridLayout: GridLayoutManager
 	private lateinit var listaCajeros:  MutableList<CajeroEntity>
 
-	private lateinit var mActivity: MainActivity
+	private var mActivity: MainActivity? = null
 
 
 	override fun onCreateView(
@@ -42,7 +42,7 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		mActivity = activity as MainActivity
-		mActivity.supportActionBar?.title = getString(R.string.cajeros)
+		mActivity?.supportActionBar?.title = getString(R.string.cajeros)
 
 		binding.addCajero.setOnClickListener {
 			val frgFormCajero = CajeroFormFragment()
@@ -101,10 +101,10 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 
 				}.start()
 
-				mActivity.runOnUiThread {
+				mActivity?.runOnUiThread {
 					mAdapter.deleteSelectedItems()
 					mAdapter.elementosSeleccionados.clear()
-					mActivity.invalidateOptionsMenu()
+					mActivity!!.invalidateOptionsMenu()
 				}
 			}
 		}
@@ -124,13 +124,13 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 
 	override fun onSelectedItem() {
 
-		mActivity.invalidateOptionsMenu()
+		mActivity?.invalidateOptionsMenu()
 	}
 
 	private fun launchFragment(fragment : Fragment) {
-		mActivity.supportFragmentManager.beginTransaction()
-			.add(R.id.fragment_container_big, fragment)
-			.addToBackStack(null).commit()
+		mActivity?.supportFragmentManager?.beginTransaction()
+			?.add(R.id.fragment_container_big, fragment)
+			?.addToBackStack(null)?.commit()
 	}
 
 	override fun setVisibilityFAB(isVisible: Boolean) {
