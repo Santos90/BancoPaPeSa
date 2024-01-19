@@ -1,10 +1,12 @@
 package com.example.banco_papesa.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,14 +19,38 @@ class CajeroAdapter(private var lista: MutableList<CajeroEntity>,
                     private val listener: OnClickListener
 
 ) : RecyclerView.Adapter<CajeroAdapter.ViewHolder>() {
-
+    val elementosSeleccionados = mutableSetOf<Any>()
     inner class ViewHolder(view:View):RecyclerView.ViewHolder(view){
         val binding = ItemMovimientoBinding.bind(view) //Vinculamos la vista a nuestro adapter
 
         fun setListener(store : CajeroEntity){
+            itemView.setBackgroundColor(Color.TRANSPARENT)
             binding.root.setOnClickListener {
-                listener.onClick(store)
+                if (elementosSeleccionados.isEmpty() ) {
+                    listener.onItemClick(store)
+                } else selectItem()
             }
+            itemView.setOnLongClickListener {
+                selectItem()
+                true // Importante: indica que el clic largo está manejado
+            }
+
+        }
+
+        fun selectItem() {
+            if (elementosSeleccionados.contains(lista[adapterPosition])) {
+                // Restaurar apariencia predeterminada
+                itemView.setBackgroundColor(Color.TRANSPARENT)
+                elementosSeleccionados.remove(lista[adapterPosition])
+            } else {
+                // Aplicar efecto visual a elementos seleccionados
+                itemView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.color_principal_diluido))
+                elementosSeleccionados.add(lista[adapterPosition])
+            }
+            listener.onSelectedItem()
+        }
+
+        fun clearVisualSelected() {
 
         }
 
@@ -36,7 +62,7 @@ class CajeroAdapter(private var lista: MutableList<CajeroEntity>,
     // El layout manager invoca este método para renderizar cada elemento del RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder { //Inflar la vista item_tarea en el Recycler
         mContext = parent.context
-        val view = LayoutInflater.from(mContext).inflate(R.layout.item_movimiento, parent, false)
+        val view = LayoutInflater.from(mContext).inflate(R.layout.item_cajero, parent, false)
 
         return ViewHolder(view)
     }
@@ -46,14 +72,8 @@ class CajeroAdapter(private var lista: MutableList<CajeroEntity>,
 
         with(holder){
             setListener(cajero)
-            binding.lblTitulo.text = "ATM $position"
+            binding.lblTitulo.text = "Cajero $position"
             binding.lblSubtitulo.text = cajero.direccion
-
-            Glide.with(mContext)
-                .load(R.drawable.ic_bank)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerCrop()
-                .into(binding.imagen)
 
         }
 
@@ -90,6 +110,12 @@ class CajeroAdapter(private var lista: MutableList<CajeroEntity>,
         if (index != -1) {
             lista.removeAt(index)
             notifyItemRemoved(index)
+        }
+    }
+
+    fun deleteSelectedItems() {
+        for (elemento in elementosSeleccionados) {
+            delete(elemento as CajeroEntity)
         }
     }
 

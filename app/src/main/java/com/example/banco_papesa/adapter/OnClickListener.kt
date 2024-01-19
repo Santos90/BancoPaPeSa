@@ -1,8 +1,8 @@
 package com.example.banco_papesa.adapter
 
-import com.example.banco_papesa.pojo.CajeroEntity
-
 
 interface OnClickListener {
-	fun onClick(obj: Any?)
+	fun onItemClick(obj: Any?)
+	//fun onItemLongClick(position: Int)
+	fun onSelectedItem()
 }

@@ -90,7 +90,11 @@ class MovementsActivity : AppCompatActivity(), OnClickListener {
 
     }
 
-    override fun onClick(obj: Any?) {
+    override fun onItemClick(obj: Any?) {
         Toast.makeText(this, (obj as Movimiento).getDescripcion(), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSelectedItem() {
+        TODO("Not yet implemented")
     }
 }

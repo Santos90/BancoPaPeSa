@@ -1,13 +1,11 @@
 package com.example.banco_papesa.fragment
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.banco_papesa.adapter.OnClickListener
 import com.example.banco_papesa.adapter.AccountsAdapter
@@ -15,7 +13,6 @@ import com.example.banco_papesa.databinding.ActivityMainBinding
 import com.example.banco_papesa.databinding.FragmentAccountsBinding
 import com.example.bancoapiprofe.bd.MiBancoOperacional
 import com.example.bancoapiprofe.pojo.Cliente
-import com.example.bancoapiprofe.pojo.Cuenta
 
 
 private const val ARG_CLIENTE = "cliente"
@@ -87,8 +84,8 @@ class AccountsFragment : Fragment(), OnClickListener {
     fun setListener (listener: OnClickListener) {
         this.listener = listener
     }
-    override fun onClick(obj: Any?) {
-        listener.onClick(obj)
+    override fun onItemClick(obj: Any?) {
+        listener.onItemClick(obj)
 /*
         var frgMovementsFilter = FilterMovementsFragment.newInstance(obj as Cuenta)
 
@@ -107,5 +104,9 @@ class AccountsFragment : Fragment(), OnClickListener {
 
 
 
+    }
+
+    override fun onSelectedItem() {
+        TODO("Not yet implemented")
     }
 }

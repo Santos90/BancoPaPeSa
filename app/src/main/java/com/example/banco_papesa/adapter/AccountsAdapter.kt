@@ -23,7 +23,7 @@ class AccountsAdapter(private val lista: ArrayList<*>,
         val binding = ItemCuentaBinding.bind(view) //Vinculamos la vista a nuestro adapter
 
         fun setListener(cuenta : Any){
-            binding.root.setOnClickListener {listener.onClick(cuenta)}
+            binding.root.setOnClickListener {listener.onItemClick(cuenta)}
         }
 
     }

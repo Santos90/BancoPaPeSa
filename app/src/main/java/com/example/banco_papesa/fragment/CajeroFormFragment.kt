@@ -78,9 +78,17 @@ class CajeroFormFragment : Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.cajero_form_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        if (editCajero == null) {
+            menu.findItem(R.id.action_delete).isVisible = false
+            menu.findItem(R.id.action_save).isVisible = true
+        } else {
+            menu.findItem(R.id.action_delete).isVisible = true
+            menu.findItem(R.id.action_save).isVisible = true
+        }
+
+
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -98,7 +106,6 @@ class CajeroFormFragment : Fragment() {
                 }
 
                 frgListCajeros?.deleteStore(editCajero!!)
-
                 returnValue = true
             }
 
@@ -126,11 +133,11 @@ class CajeroFormFragment : Fragment() {
                 with (cola.take()) {
                     if (editCajero == null) {
                         Snackbar.make(binding.root,
-                            "Tienda agregada correctamente", Snackbar.LENGTH_SHORT).show()
+                            getString(R.string.tienda_agregada_correctamente), Snackbar.LENGTH_SHORT).show()
                         frgListCajeros?.addCajero(cajeroForm)
                     } else {
                         Snackbar.make(binding.root,
-                            "Tienda modificada correctamente", Snackbar.LENGTH_SHORT).show()
+                            getString(R.string.tienda_modificada_correctamente), Snackbar.LENGTH_SHORT).show()
                         frgListCajeros?.updateCajero(editCajero!! ,cajeroForm)
                     }
 
@@ -140,7 +147,9 @@ class CajeroFormFragment : Fragment() {
             } else -> super.onOptionsItemSelected(item)
         }
         frgListCajeros?.setVisibilityFAB(true)
+        mActivity.supportActionBar!!.title =  getString(R.string.cajeros)
         mActivity.onBackPressedDispatcher.onBackPressed()
+
         return  returnValue
 
     }

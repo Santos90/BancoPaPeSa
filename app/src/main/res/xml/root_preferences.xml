@@ -1,4 +1,5 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory app:title="Opciones">
 
@@ -25,6 +26,7 @@
             app:key="musica"
             app:summaryOff="Desactivada"
             app:summaryOn="Activada"
+            app:defaultValue="true"
             app:title="@string/musica_ambiental" />
 
         <SwitchPreferenceCompat
@@ -32,6 +34,7 @@
             app:key="animacion"
             app:summaryOff="Desactivada"
             app:summaryOn="Activada"
+            app:defaultValue="true"
             app:title="@string/animacion_inicial" />
 
     </PreferenceCategory>

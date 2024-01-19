@@ -37,7 +37,7 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
         frgAccounts.setListener(this)
     }
 
-    override fun onClick(obj: Any?) {
+    override fun onItemClick(obj: Any?) {
         if (obj is Cuenta) {
             Log.i("Tipo de objeto", "Es una Cuenta")
             //Creamos la instancia del fragment
@@ -69,4 +69,10 @@ class GlobalPositionActivity : AppCompatActivity(), OnClickListener {
 
 
     }
+
+    override fun onSelectedItem() {
+        TODO("Not yet implemented")
+    }
+
+
 }

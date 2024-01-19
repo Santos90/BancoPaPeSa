@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 			.addToBackStack(null).commit()
 	}
 
-	override fun onClick(obj: Any?) {
+	override fun onItemClick(obj: Any?) {
 		if (obj is Cuenta) {
 			Log.i("Tipo de objeto", "Es una Cuenta")
 			//Creamos la instancia del fragment
@@ -149,6 +149,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 				Log.i("Landscape:", false.toString())
 			}
 		} else if (obj is Movimiento) Log.i("Tipo de objeto", "Es un Movimiento") //Puc gestionar diferents objectes amb el mateix listener
+	}
+
+	override fun onSelectedItem() {
+		TODO("Not yet implemented")
 	}
 
 

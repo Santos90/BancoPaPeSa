@@ -14,5 +14,6 @@
         android:icon="@drawable/ic_delete"
         android:iconTint="@color/white"
 
+
         app:showAsAction="ifRoom"/>
 </menu>

@@ -21,8 +21,10 @@
             android:layout_height="60dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_bank"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="@dimen/minium_margin"
+            android:layout_marginStart="@dimen/minium_margin"
+            android:src="@drawable/ic_atm"
             android:contentDescription="Recurso web no encontrado"/>
 
         <TextView
@@ -39,16 +41,21 @@
 
         <TextView
             android:id="@+id/lblSubtitulo"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textStyle="normal"
-            tools:text="Dirección\n\n\ndsa\ndsadka"
-            android:minLines="3"
-            android:maxLines="4"
+            tools:text="Direccion de ka s daj j dsa lkj klj dsa ,  djsakl j djsl lkjdsa jkldsa\nComer cantar"
+
+
             app:layout_constraintStart_toEndOf="@id/imagen"
             app:layout_constraintTop_toBottomOf="@id/lblTitulo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="@dimen/common_margin_default"
+            android:layout_marginEnd="@dimen/common_margin_default"
+            android:layout_marginBottom="@dimen/common_margin_default"
+
             android:textColor="@color/color_principal"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

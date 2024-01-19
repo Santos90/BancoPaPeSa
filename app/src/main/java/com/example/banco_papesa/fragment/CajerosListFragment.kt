@@ -3,6 +3,9 @@ package com.example.banco_papesa.fragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.replace
@@ -21,6 +24,7 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 	private lateinit var binding: FragmentCajerosBinding
 	private lateinit var mAdapter: CajeroAdapter
 	private lateinit var mGridLayout: GridLayoutManager
+	private lateinit var listaCajeros:  MutableList<CajeroEntity>
 
 	private lateinit var mActivity: MainActivity
 
@@ -32,12 +36,13 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 		// Inflate the layout for this fragment
 		binding = FragmentCajerosBinding.inflate(layoutInflater)
 		setupRecyclerView()
+		setHasOptionsMenu(true)
 		return binding.root
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		mActivity = activity as MainActivity
-		mActivity?.supportActionBar?.title = "Cajeros"
+		mActivity.supportActionBar?.title = getString(R.string.cajeros)
 
 		binding.addCajero.setOnClickListener {
 			val frgFormCajero = CajeroFormFragment()
@@ -64,11 +69,45 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 			cola.add(stores)
 
 		}.start()
-		mAdapter.setCajero(cola.take())
+		listaCajeros = cola.take()
+		mAdapter.setCajero(listaCajeros)
+	}
+
+	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+		inflater.inflate(R.menu.cajero_form_menu, menu)
+		super.onCreateOptionsMenu(menu, inflater)
+	}
+
+	override fun onPrepareOptionsMenu(menu: Menu) {
+		if (mAdapter.elementosSeleccionados.isEmpty()) {
+			menu.findItem(R.id.action_delete).isVisible = false
+		}
+		menu.findItem(R.id.action_save).isVisible = false
+		return super.onPrepareOptionsMenu(menu)
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		var returnValue = false
+		when (item.itemId) {
+			R.id.action_delete -> {
+				Thread {
+					for ( cajero in mAdapter.elementosSeleccionados) {
+						BankApplication.database.cajeroDAO().deleteCajero(cajero as CajeroEntity)
+					}
+
+
+				}.start()
+
+				mAdapter.deleteSelectedItems()
+				mAdapter.elementosSeleccionados.clear()
+				mActivity.invalidateOptionsMenu()
+			}
+		}
+		return  returnValue
 	}
 
 
-	override fun onClick(obj: Any?) {
+	override fun onItemClick(obj: Any?) {
 		var args = Bundle()
 		args.putLong("idCajeroSeleccionado", (obj as CajeroEntity).id )
 
@@ -86,9 +125,14 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 		launchFragment(frgFormCajero)
 	}
 
+	override fun onSelectedItem() {
+
+		mActivity.invalidateOptionsMenu()
+	}
+
 	private fun launchFragment(fragment : Fragment) {
 		mActivity.supportFragmentManager.beginTransaction()
-			.replace(R.id.fragment_container_big, fragment)
+			.add(R.id.fragment_container_big, fragment)
 			.addToBackStack(null).commit()
 	}
 

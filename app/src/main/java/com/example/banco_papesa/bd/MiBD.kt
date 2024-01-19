@@ -4,6 +4,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.example.banco_papesa.database.BankApplication
+import com.example.banco_papesa.pojo.CajeroEntity
 import com.example.bancoapiprofe.dao.ClienteDAO
 import com.example.bancoapiprofe.dao.CuentaDAO
 import com.example.bancoapiprofe.dao.MovimientoDAO
@@ -69,6 +71,24 @@ protected constructor(context: Context?) :
     }
 
     private fun insercionDatos(db: SQLiteDatabase) {
+        val cajerosEntityLists : List<CajeroEntity> = listOf(
+            CajeroEntity(1, "Carrer del Clariano, 1, 46021 Valencia, Valencia, España",
+                39.47600769999999, -0.3524475000000393, ""),
+            CajeroEntity(2, "Avinguda del Cardenal Benlloch, 65, 46021 València, Valencia, España",
+                39.4710366, -0.3547525000000178, ""),
+            CajeroEntity(3, "Av. del Port, 237, 46011 València, Valencia, España",
+                39.46161999999999, -0.3376299999999901, ""),
+            CajeroEntity(4, "Carrer del Batxiller, 6, 46010 València, Valencia, España",
+                39.4826729, -0.3639118999999482, ""),
+            CajeroEntity(5, "Av. del Regne de València, 2, 46005 València, Valencia, España",
+                39.4647669, -0.3732760000000326, "")
+        )
+
+        Thread {
+            BankApplication.database.cajeroDAO().insertAll(cajerosEntityLists)
+        }.start()
+
+
         // Insertamos los clientes
         db.execSQL("INSERT INTO clientes(id, nif, nombre, apellidos, claveSeguridad, email) VALUES (1, '11111111A', 'Filemón', 'Pí', '1234', 'filemon.pi@tia.es');")
         db.execSQL("INSERT INTO clientes(id, nif, nombre, apellidos, claveSeguridad, email) VALUES (2, '22222222B', 'Mortadelo', 'Ibáñez', '1234', 'mortadelo.ibanez@tia.es');")

@@ -20,7 +20,7 @@ class MovementsAdapter (private val lista: ArrayList<Movimiento>, private val li
         val binding = ItemMovimientoBinding.bind(view) //Vinculamos la vista a nuestro adapter
 
         fun setListener(item :Movimiento){
-            binding.root.setOnClickListener {listener.onClick(item)}
+            binding.root.setOnClickListener {listener.onItemClick(item)}
         }
 
     }

@@ -3,5 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_principal">#558B2F</color>
+    <color name="color_principal_diluido">#8C558B2F</color>
     <color name="rojo_negativo">#DC1A2B</color>
 </resources>

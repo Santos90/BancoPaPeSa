@@ -102,7 +102,7 @@ class FilterMovementsFragment : Fragment(), OnClickListener {
     }
 
 
-    override fun onClick(obj: Any?) {
+    override fun onItemClick(obj: Any?) {
 
         dialogBinding = DialogMovementBinding.inflate(layoutInflater)
         val movimiento = obj as Movimiento
@@ -127,5 +127,9 @@ class FilterMovementsFragment : Fragment(), OnClickListener {
                 dialog.cancel()
             })
             .show()
+    }
+
+    override fun onSelectedItem() {
+        TODO("Not yet implemented")
     }
 }

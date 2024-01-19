@@ -74,4 +74,6 @@
     <string name="origen_bd">Origen de la base de datos</string>
     <string name="musica_ambiental">Música ambiental</string>
     <string name="animacion_inicial">Animación inicial</string>
+    <string name="tienda_modificada_correctamente">Tienda modificada correctamente</string>
+    <string name="tienda_agregada_correctamente">Tienda agregada correctamente</string>
 </resources>
