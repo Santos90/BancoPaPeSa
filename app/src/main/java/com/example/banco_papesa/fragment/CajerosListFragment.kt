@@ -88,19 +88,24 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		var returnValue = false
+
+		val iterator = mAdapter.elementosSeleccionados.iterator()
 		when (item.itemId) {
 			R.id.action_delete -> {
+				val elementosSeleccionadosCopy = mAdapter.elementosSeleccionados.toSet()
 				Thread {
-					for ( cajero in mAdapter.elementosSeleccionados) {
+					for ( cajero in elementosSeleccionadosCopy) {
 						BankApplication.database.cajeroDAO().deleteCajero(cajero as CajeroEntity)
 					}
 
 
 				}.start()
 
-				mAdapter.deleteSelectedItems()
-				mAdapter.elementosSeleccionados.clear()
-				mActivity.invalidateOptionsMenu()
+				mActivity.runOnUiThread {
+					mAdapter.deleteSelectedItems()
+					mAdapter.elementosSeleccionados.clear()
+					mActivity.invalidateOptionsMenu()
+				}
 			}
 		}
 		return  returnValue
@@ -108,19 +113,11 @@ class CajerosListFragment : Fragment(), OnClickListener, ListaCajerosAux {
 
 
 	override fun onItemClick(obj: Any?) {
-		var args = Bundle()
-		args.putLong("idCajeroSeleccionado", (obj as CajeroEntity).id )
-
 
 		val frgFormCajero = CajeroFormFragment()
+		var args = Bundle()
+		args.putLong("idCajeroSeleccionado", (obj as CajeroEntity).id )
 		if (args != null) frgFormCajero.arguments = args
-
-		/*
-		mActivity.supportFragmentManager.beginTransaction()
-			.add(R.id.fragment_container_big, frgFormCajero, "CajerosListFragment")
-			.addToBackStack(null)
-			.commit()
-		 */
 
 		launchFragment(frgFormCajero)
 	}
